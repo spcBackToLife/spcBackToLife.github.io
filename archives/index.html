@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>文章归档 | 秋泽雨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="秋泽雨、全栈开发">
+    <meta name="description" content="秋泽雨的个人小站">
+
+    
+    <link rel="alternative" href="/atom.xml" title="秋泽雨" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">秋泽雨</span>
+                    <span class="description">秋泽雨小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/archives/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/archives/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/spcBackToLife/" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/headIcon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章归档 -->
+
+    <h3 class="widget-hd">
+        <strong>
+            
+                文章归档
+                <!-- 文章归档，可以根据日期分类 -->
+            
+        </strong>
+    </h3>
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/RabbitMQ/">RabbitMQ</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="http://localhost:4000/2019/10/15/rabbitMQ的jar封装/">
+    		rabbitMQ的jar封装
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-15T09:53:43.000Z">2019-10-15</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/RabbitMQ/" title="RabbitMQ">RabbitMQ</a> / 
+    
+        <a href="/tags/java/" title="java">java</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <h2 id="一丶介绍"><a href="#一丶介绍" class="headerlink" title="一丶介绍"></a>一丶介绍</h2><p>​     rabbitMQJar是对rabbitmq的一种jar包封装，使其能简单的被java程序调用。在spring的rabbitTemplate基础上进一步简化使用。此项目参考了<a href="https://github.com/littlersmall/rabbitmq-access项目的多线程消费者与消息重发机制。也非常感谢作者的开源支持。" target="_blank" rel="noopener">https://github.com/littlersmall/rabbitmq-access项目的多线程消费者与消息重发机制。也非常感谢作者的开源支持。</a></p>
+<h2 id="二丶封装功能支持"><a href="#二丶封装功能支持" class="headerlink" title="二丶封装功能支持"></a>二丶封装功能支持</h2><ol>
+<li>支持发送字符串类型消息与java对象消息。</li>
+<li>支持多线程消费者。（固定线程池）</li>
+<li>支持消息重发，保证消息可靠到达。</li>
+</ol>
+<h2 id="三丶缺点"><a href="#三丶缺点" class="headerlink" title="三丶缺点"></a>三丶缺点</h2><ol>
+<li>消息重发机制缺陷：</li>
+</ol>
+<pre><code>因发送消息至MQ后，需要MQ返回ACK确认发送成功，但在发送ACK返回前突然断网，则不知道是否发送成功。一定时间未收到ACK，则认定发送失败重发，而或许已经发送成功，只是还未有ACK确认。因此可能会造成消息多发。经过rabbitmq-access作者测试发送300w条数据，发送结束后，实际发送数据301.2w条。详细性能见：https://www.jianshu.com/p/4112d78a8753</code></pre><h2 id="四丶rabbitMQJar-API"><a href="#四丶rabbitMQJar-API" class="headerlink" title="四丶rabbitMQJar API"></a>四丶rabbitMQJar API</h2><ol>
+<li>Rabbit:</li>
+</ol>
+<pre><code>Rabbit对象里封装了设置连接，创建Exchange丶queue，接收消息功能。</code></pre><ol start="2">
+<li>SenderInter:</li>
+</ol>
+<pre><code>发送消息接口。</code></pre><ol start="3">
+<li>SenderBuilder:</li>
+</ol>
+<pre><code>发送消息对象创建者。可以创建一个发送消息对象。</code></pre><ol start="4">
+<li>MessageProcessInter:</li>
+</ol>
+<pre><code>消息处理接口，用于接收到消息后给用户自己处理。</code></pre><ol start="5">
+<li>设置连接属性接口:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setConnection</span><span class="params">(String host,<span class="keyword">int</span> port,String username,String password)</span></span>;                         --属于Rabbit类方法</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>启动连接接口:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rabbit rabbit = Rabbit.start();</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>创建Exchange:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createExchange</span><span class="params">(String exchange,String routingKey,String type,<span class="keyword">boolean</span> durable,<span class="keyword">boolean</span> autoDelete,Connection connection)</span></span></span><br><span class="line"><span class="function">type: direct丶fanout丶 topic</span></span><br><span class="line"><span class="function">durable:　是否持久化exchange，即重启是否保留这个exchange。</span></span><br><span class="line"><span class="function">autoDelete: 没有消费者的时候，服务器是否删除exchange.</span></span><br><span class="line"><span class="function">Connection: rabbitTemplate的连接对象。</span></span><br><span class="line"><span class="function"> 											--属于Rabbit对象方法</span></span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>创建队列并绑定exchange:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createQueueAndBindExchange</span><span class="params">(String queue,<span class="keyword">boolean</span> durable,<span class="keyword">boolean</span> exclusive,<span class="keyword">boolean</span> autoDelete,Connection connection)</span></span>;</span><br><span class="line">durable:　在服务器重启时，队列是否不删除.</span><br><span class="line">exclusive: 是否为当前连接的专用队列。(专用则在连接断开后，会自动删除该队列）</span><br><span class="line">autoDelete: 当没有任何消费者使用时，自动删除该队列。</span><br><span class="line">Connection: rabbitTemplate的连接对象。</span><br><span class="line"> 											--属于Rabbit对象方法</span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>创建发送者:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SenderInter <span class="title">buildMessageSender</span><span class="params">(String exchange,String routingKey,String queue,Rabbit rabbit)</span></span>;</span><br><span class="line">其中queue参数可为空串，表示只往exchange发消息，不直接发送到队列，而是y与exchange绑定的队列可以接收到消息。</span><br><span class="line">										--属于SenderBuilder类方法</span><br></pre></td></tr></table></figure>
+
+<ol start="10">
+<li>发送消息:</li>
+</ol>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">send</span><span class="params">(String message)</span></span>;<span class="comment">// 发送字符串</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">send</span><span class="params">(Object message)</span></span>;<span class="comment">// 发送java对象</span></span><br><span class="line">                                          --属于SenderInter接口方法</span><br></pre></td></tr></table></figure></code></pre><ol start="11">
+<li>接收消息:</li>
+</ol>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">threadPoolConsume</span><span class="params">(<span class="keyword">int</span> threadCount,<span class="keyword">int</span> interval,String queue,MessageProcessInter messageProcess)</span></span>;</span><br><span class="line">threadCount: 消费者线程数量。</span><br><span class="line">interval: 每个线程消费消息的间隔时间。</span><br><span class="line">messageProcess: 消息处理对象。（用户自定义对象继承MessageProcessInter接口）。</span><br></pre></td></tr></table></figure></code></pre><h2 id="五丶例子"><a href="#五丶例子" class="headerlink" title="五丶例子"></a>五丶例子</h2><ol>
+<li>导入jar包：rabbitMQ.jar。</li>
+</ol>
+<ol start="2">
+<li>设置并启动连接:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Rabbit.setConnection(<span class="string">"127.0.0.1"</span>, <span class="number">5672</span>, <span class="string">"username"</span>, <span class="string">"password"</span>);<span class="comment">// 设置连接的ip丶端口丶用户名丶密码</span></span><br><span class="line">Rabbit rabbit = Rabbit.start();<span class="comment">// 启动连接</span></span><br></pre></td></tr></table></figure>
+
+<p>   ​</p>
+<ol start="3">
+<li>创建Exchange:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbit.createExchange(<span class="string">"exchange"</span>, <span class="string">"routingKey"</span>,<span class="string">"type"</span>,<span class="keyword">true</span>,<span class="keyword">false</span>,rabbit.getConnection());</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>创建Queue:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbit.createQueueAndBindExchange(<span class="string">"queue"</span>,<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">false</span>,rabbit.getConnection());</span><br></pre></td></tr></table></figure>
+
+<p>   ​</p>
+<ol start="5">
+<li>创建消息发送者:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SenderInter sender=SenderBuilder.buildMessageSender(<span class="string">"exchange"</span>,<span class="string">""</span>,rabbit);</span><br><span class="line"><span class="comment">//发送string消息</span></span><br><span class="line">sender.send(<span class="string">"我是rabbit"</span>);</span><br><span class="line"><span class="comment">//发送对象消息</span></span><br><span class="line">sender.send(<span class="keyword">new</span> ConsumeFlag(<span class="keyword">true</span>,<span class="string">"i am rabbit"</span>)); <span class="comment">//对象用户自定义，此处只是例子。</span></span><br></pre></td></tr></table></figure>
+
+<p>   ​</p>
+<ol start="6">
+<li>创建消息处理类:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pk.rabbit;</span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Message;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.support.converter.MessageConverter;</span><br><span class="line"><span class="keyword">import</span> com.pk.rabbit.common.SuccessFlag;</span><br><span class="line"><span class="keyword">import</span> com.pk.rabbit.handle.MessageProcessInter;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyProcess</span> <span class="keyword">implements</span> <span class="title">MessageProcessInter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> SuccessFlag <span class="title">process</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line">    MessageConverter messageConverter = <span class="keyword">new</span> Jackson2JsonMessageConverter();</span><br><span class="line">    <span class="comment">// 对象接收</span></span><br><span class="line">    <span class="comment">// ConsumeFlag cf = (ConsumeFlag) messageConverter.fromMessage(message);</span></span><br><span class="line">    <span class="comment">// System.out.println(cf.getError());</span></span><br><span class="line">    <span class="comment">// 字符串接收</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      System.out.println(<span class="keyword">new</span> String(message.getBody(), <span class="string">"UTF-8"</span>));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SuccessFlag(<span class="keyword">true</span>, <span class="string">""</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>创建消息处理对象:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyProcess mp=<span class="keyword">new</span> MyProcess();</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>开启线程池消费者:</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbit.threadPoolConsume(<span class="number">2</span>,<span class="number">1</span>,<span class="string">"queue"</span>,mp);</span><br></pre></td></tr></table></figure>
+
+<p>github: <a href="https://github.com/spcBackToLife/rabbitJar" target="_blank" rel="noopener">https://github.com/spcBackToLife/rabbitJar</a></p>
+
+            
+            <p class="more">
+                <a href="http://localhost:4000/2019/10/15/rabbitMQ的jar封装/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://localhost:4000/2019/10/15/rabbitMQ的jar封装/" title="rabbitMQ的jar封装">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/Electron/">Electron</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="http://localhost:4000/2019/10/15/Electron-入门简介/">
+    		Electron 入门简介
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-15T09:52:23.000Z">2019-10-15</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/博客/" title="博客">博客</a> / 
+    
+        <a href="/tags/Electron/" title="Electron">Electron</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <h2 id="Electron-简介"><a href="#Electron-简介" class="headerlink" title="Electron 简介"></a>Electron 简介</h2><p>  <code>Electron</code> 是 <code>跨平台</code> 的桌面应用。<br>  <code>Electron</code> 兼容 Mac, Windows(xp不兼容) 和 Linux。<br>  <code>Electron</code> 基于 <code>Chromium</code> 和 <code>Node.js</code>, 让你可以使用 HTML, CSS 和 JavaScript 构建应用。<br>  <code>Electron</code> 的内核<code>Chromium</code>会随着<code>Electron</code>的版本更新而更新。当然，你也可以自己指定更新内核。（建议跟<code>Electron</code>版本更方便）</p>
+<h2 id="Electron-的开发场景"><a href="#Electron-的开发场景" class="headerlink" title="Electron 的开发场景"></a>Electron 的开发场景</h2><p>  (1) <code>Electron</code> 本地环境搭建（mac、windows）</p>
+<p>  (2) webvidw开发、flash使用与打包</p>
+<p>  (3) webview与渲染进程通信、主进程与渲染进程通信</p>
+<p>  (4) 应用mac、windows打包</p>
+<p>  (5) 多窗口如何开发与打包</p>
+<p>  (6) <code>Electron</code> 自动升级（github 方案、自建服务器方案）</p>
+<p>  (7) mac、windows证书问题，360误报杀毒问题</p>
+<h4 id="Electron-本地环境搭建（mac、windows）"><a href="#Electron-本地环境搭建（mac、windows）" class="headerlink" title="Electron 本地环境搭建（mac、windows）"></a><code>Electron</code> 本地环境搭建（mac、windows）</h4><p>官方教程：<a href="https://electronjs.org/docs/tutorial/development-environment" target="_blank" rel="noopener">https://electronjs.org/docs/tutorial/development-environment</a></p>
+<ol>
+<li><p>mac 环境的搭建</p>
+<p>（1）安装最新版node即可。</p>
+</li>
+<li><p>windows 环境的搭建</p>
+<p>(1) 安装python2.7 (electron需要用到python来打包)</p>
+<pre><code>选择2.7版本进行下载
+https://www.python.org/getit/</code></pre><p>(2) 安装<code>node-gyp</code></p>
+<pre><code>npm install -g node-gyp
+// windows 编译工具（请耐心等待，大概要10-15分钟才行，完成后会有done的提示的）
+npm install --global --production windows-build-tools</code></pre><p>(3) 运行时出现此错误的话： MSBUILD : error MSB4132，无法识别工具版本“2.0” 等（还有提示啥14.0,4.0的都一样）。</p>
+<pre><code>// 此处2015 是电脑上装的2015 ，如果不是，可以看自己电脑是不是2012，
+// 或者不知道怎么看的，直接试试 2012 是不是得行。
+npm install --msvs_version 2015 -g
+npm config set msvs_version 2015 -g</code></pre><p>(4) 打包时候总有包，无论开不开代理都下不下来的话，请如下做：</p>
+<pre><code>复制终端中，下不下来的路径，直接去那个路径（应该是github的路径）下载，
+并将文件拷贝到，如下目录下相关文件夹中，比如nsis的
+C:\Users\pk\AppData\Local\electron-builder\Cache\nsis。</code></pre></li>
+</ol>
+<h4 id="Electron-demo-运行"><a href="#Electron-demo-运行" class="headerlink" title="Electron demo 运行"></a><code>Electron</code> demo 运行</h4><p>  官方示例: <a href="https://electronjs.org/docs/tutorial/first-app" target="_blank" rel="noopener">https://electronjs.org/docs/tutorial/first-app</a></p>
+<ol>
+<li><p>快速搭建与启动方式:</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">克隆这仓库</span><br><span class="line">git clone https://github.com/electron/electron-quick-start</span><br><span class="line">进入仓库</span><br><span class="line">cd electron-quick-start</span><br><span class="line">安装依赖库</span><br><span class="line">npm install</span><br><span class="line">运行应用</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>7步带你理解整个过程：</p>
+<pre><code>(1) 新建一个目录: myElectron
+(2) 切到目录下: npm init
+(3) package.json 中增加启动命令，start。文件具体内容如下：
+
+  {
+     &quot;name&quot;: &quot;myelectron&quot;,
+     &quot;version&quot;: &quot;1.0.0&quot;,
+     &quot;description&quot;: &quot;&quot;,
+     &quot;main&quot;: &quot;index.js&quot;,
+     &quot;scripts&quot;: {
+       &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+       &quot;start&quot;: &quot;electron .&quot;
+     },
+     &quot;author&quot;: &quot;&quot;,
+     &quot;license&quot;: &quot;ISC&quot;
+  }</code></pre><p>   (4) 新建一个index.js，作为启动文件。（注意package.json中配置的也是这个文件哦: <code>&quot;main&quot;: &quot;index.js&quot;</code>）</p>
+<pre><code>const { app, BrowserWindow } = require(&apos;electron&apos;);
+
+function createWindow () {
+  // 创建浏览器窗口
+  let win = new BrowserWindow({ width: 800, height: 600 });
+
+  // 然后加载 app 的 index.html.
+  win.loadFile(&apos;index.html&apos;);
+}
+
+app.on(&apos;ready&apos;, createWindow);</code></pre><p>   (5) 新建index.html 用于呈现桌面应用页面的。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Hello World!&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  Hellow, World!
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>(6) 安装依赖(建议用yarn,因为官方也推荐)</p>
+<pre><code> ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ yarn add electron --save
+(ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install electron --save-dev)</code></pre><p> (7) 运行electron </p>
+<pre><code>yarn start (npm run start)</code></pre></li>
+</ol>
+
+            
+            <p class="more">
+                <a href="http://localhost:4000/2019/10/15/Electron-入门简介/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://localhost:4000/2019/10/15/Electron-入门简介/" title="Electron 入门简介">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/Electron/">Electron</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="http://localhost:4000/2019/10/15/Electron-Failed to fetch extension problems/">
+    		Electron-Failed to fetch extension problems
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-15T06:14:37.000Z">2019-10-15</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/博客/" title="博客">博客</a> / 
+    
+        <a href="/tags/Electron/" title="Electron">Electron</a> / 
+    
+        <a href="/tags/Problems/" title="Problems">Problems</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>这个是在链接chrome插件的时候访问不到，导致的。可以在应用中取掉此插件, 比如你的应用里有如此代码，就是加载插件(electronInstall)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">installExtensions</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    process.env.NODE_ENV === <span class="string">'development'</span></span><br><span class="line">    || process.env.DEBUG_PROD === <span class="string">'true'</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">const</span> forceDownload = !!process.env.UPGRADE_EXTENSIONS;</span><br><span class="line">    <span class="keyword">await</span> electronInstall([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS], forceDownload);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>复制：C:\Users\pk\AppData\Roaming\Electron 中的文件到自己电脑中。</p>
+<p>AppData是隐藏文件夹，需要显示了能看哦。</p>
+<p>或者你换个热点、翻个墙，就可以下载chrome插件了。</p>
+
+            
+            <p class="more">
+                <a href="http://localhost:4000/2019/10/15/Electron-Failed to fetch extension problems/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://localhost:4000/2019/10/15/Electron-Failed to fetch extension problems/" title="Electron-Failed to fetch extension problems">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/Electron/">Electron</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="http://localhost:4000/2019/10/15/Electron windows environment problems/">
+    		Eelectron windows -   MSBUILD : error MSB4132
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-15T06:14:37.000Z">2019-10-15</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/博客/" title="博客">博客</a> / 
+    
+        <a href="/tags/Electron/" title="Electron">Electron</a> / 
+    
+        <a href="/tags/Problems/" title="Problems">Problems</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>运行时出现此错误的话： MSBUILD : error MSB4132，无法识别工具版本“2.0” 等（还有提示啥14.0,4.0的都一样）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 此处2015 是电脑上装的2015 ，如果不是，可以看自己电脑是不是2012，</span><br><span class="line">// 或者不知道怎么看的，直接试试 2012 是不是得行。</span><br><span class="line">npm install --global --production windows-build-tools(管理员权限) -- 预计要15分钟左右，耐心等待</span><br><span class="line">npm install --msvs_version 2015 -g</span><br><span class="line">npm config <span class="built_in">set</span> msvs_version 2015 -g</span><br></pre></td></tr></table></figure>
+            
+            <p class="more">
+                <a href="http://localhost:4000/2019/10/15/Electron windows environment problems/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://localhost:4000/2019/10/15/Electron windows environment problems/" title="Eelectron windows -   MSBUILD : error MSB4132">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+
+    
+    <nav class="page-navigator">
+        <span class="page-number current">1</span>
+    </nav>
+    
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Electron/">Electron</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/RabbitMQ/">RabbitMQ</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/博客/" title="博客">博客 (3)</a>
+  
+    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (3)</a>
+  
+    <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
+  
+    <a class="tag-item" href="/tags/RabbitMQ/" title="RabbitMQ">RabbitMQ (1)</a>
+  
+    <a class="tag-item" href="/tags/java/" title="java">java (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://github.com/spcBackToLife/" target="_blank" title="秋泽雨的github">Github</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2019
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>
