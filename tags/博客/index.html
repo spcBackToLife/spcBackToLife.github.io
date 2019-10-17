@@ -123,7 +123,7 @@
         <!-- 文章标题 -->
         
     <h3 class="post-title">
-    	<a href="http://localhost:4000/2019/10/15/github-blog/">
+    	<a href="https://spcbacktolife.github.io/2019/10/15/github-blog/">
     		hexo+github+githubcomment 搭建自己的博客
     	</a>
     </h3>
@@ -156,11 +156,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init myBlog</span><br><span class="line"><span class="built_in">cd</span> myBlog</span><br><span class="line">yarn install</span><br></pre></td></tr></table></figure>
             
             <p class="more">
-                <a href="http://localhost:4000/2019/10/15/github-blog/">阅读剩下更多</a>
+                <a href="https://spcbacktolife.github.io/2019/10/15/github-blog/">阅读剩下更多</a>
             </p>
         </div>
         <div class="post-thumbnail" data-img="">
-            <a href="http://localhost:4000/2019/10/15/github-blog/" title="hexo+github+githubcomment 搭建自己的博客">
+            <a href="https://spcbacktolife.github.io/2019/10/15/github-blog/" title="hexo+github+githubcomment 搭建自己的博客">
                 
                     <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
                 
@@ -180,7 +180,7 @@
         <!-- 文章标题 -->
         
     <h3 class="post-title">
-    	<a href="http://localhost:4000/2019/10/15/Electron-入门简介/">
+    	<a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/">
     		Electron 入门简介
     	</a>
     </h3>
@@ -208,11 +208,11 @@
                 <h2 id="Electron-简介"><a href="#Electron-简介" class="headerlink" title="Electron 简介"></a>Electron 简介</h2><p>  <code>Electron</code> 是 <code>跨平台</code> 的桌面应用。<br>  <code>Electron</code> 兼容 Mac, Windows(xp不兼容) 和 Linux。<br>  <code>Electron</code> 基于 <code>Chromium</code> 和 <code>Node.js</code>, 让你可以使用 HTML, CSS 和 JavaScript 构建应用。<br>  <code>Electron</code> 的内核<code>Chromium</code>会随着<code>Electron</code>的版本更新而更新。当然，你也可以自己指定更新内核。（建议跟<code>Electron</code>版本更方便）</p>
             
             <p class="more">
-                <a href="http://localhost:4000/2019/10/15/Electron-入门简介/">阅读剩下更多</a>
+                <a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/">阅读剩下更多</a>
             </p>
         </div>
         <div class="post-thumbnail" data-img="">
-            <a href="http://localhost:4000/2019/10/15/Electron-入门简介/" title="Electron 入门简介">
+            <a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/" title="Electron 入门简介">
                 
                     <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
                 
@@ -232,7 +232,62 @@
         <!-- 文章标题 -->
         
     <h3 class="post-title">
-    	<a href="http://localhost:4000/2019/10/15/Electron-Failed to fetch extension problems/">
+    	<a href="https://spcbacktolife.github.io/2019/10/15/Electron windows environment problems/">
+    		Eelectron windows -   MSBUILD : error MSB4132
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-15T06:14:37.000Z">2019-10-15</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/博客/" title="博客">博客</a> / 
+    
+        <a href="/tags/Electron/" title="Electron">Electron</a> / 
+    
+        <a href="/tags/Problems/" title="Problems">Problems</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>运行时出现此错误的话： MSBUILD : error MSB4132，无法识别工具版本“2.0” 等（还有提示啥14.0,4.0的都一样）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 此处2015 是电脑上装的2015 ，如果不是，可以看自己电脑是不是2012，</span><br><span class="line">// 或者不知道怎么看的，直接试试 2012 是不是得行。</span><br><span class="line">npm install --global --production windows-build-tools(管理员权限) -- 预计要15分钟左右，耐心等待</span><br><span class="line">npm install --msvs_version 2015 -g</span><br><span class="line">npm config <span class="built_in">set</span> msvs_version 2015 -g</span><br></pre></td></tr></table></figure>
+            
+            <p class="more">
+                <a href="https://spcbacktolife.github.io/2019/10/15/Electron windows environment problems/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="https://spcbacktolife.github.io/2019/10/15/Electron windows environment problems/" title="Eelectron windows -   MSBUILD : error MSB4132">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/Electron/">Electron</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="https://spcbacktolife.github.io/2019/10/15/Electron-Failed to fetch extension problems/">
     		Electron-Failed to fetch extension problems
     	</a>
     </h3>
@@ -268,66 +323,11 @@
 
             
             <p class="more">
-                <a href="http://localhost:4000/2019/10/15/Electron-Failed to fetch extension problems/">阅读剩下更多</a>
+                <a href="https://spcbacktolife.github.io/2019/10/15/Electron-Failed to fetch extension problems/">阅读剩下更多</a>
             </p>
         </div>
         <div class="post-thumbnail" data-img="">
-            <a href="http://localhost:4000/2019/10/15/Electron-Failed to fetch extension problems/" title="Electron-Failed to fetch extension problems">
-                
-                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
-                
-            </a>
-        </div>
-    </div>
-</article>
-
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="/categories/Electron/">Electron</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="http://localhost:4000/2019/10/15/Electron windows environment problems/">
-    		Eelectron windows -   MSBUILD : error MSB4132
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        秋泽雨 发表于
-        <time datetime="2019-10-15T06:14:37.000Z">2019-10-15</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="/tags/博客/" title="博客">博客</a> / 
-    
-        <a href="/tags/Electron/" title="Electron">Electron</a> / 
-    
-        <a href="/tags/Problems/" title="Problems">Problems</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>运行时出现此错误的话： MSBUILD : error MSB4132，无法识别工具版本“2.0” 等（还有提示啥14.0,4.0的都一样）。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 此处2015 是电脑上装的2015 ，如果不是，可以看自己电脑是不是2012，</span><br><span class="line">// 或者不知道怎么看的，直接试试 2012 是不是得行。</span><br><span class="line">npm install --global --production windows-build-tools(管理员权限) -- 预计要15分钟左右，耐心等待</span><br><span class="line">npm install --msvs_version 2015 -g</span><br><span class="line">npm config <span class="built_in">set</span> msvs_version 2015 -g</span><br></pre></td></tr></table></figure>
-            
-            <p class="more">
-                <a href="http://localhost:4000/2019/10/15/Electron windows environment problems/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://localhost:4000/2019/10/15/Electron windows environment problems/" title="Eelectron windows -   MSBUILD : error MSB4132">
+            <a href="https://spcbacktolife.github.io/2019/10/15/Electron-Failed to fetch extension problems/" title="Electron-Failed to fetch extension problems">
                 
                     <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
                 
