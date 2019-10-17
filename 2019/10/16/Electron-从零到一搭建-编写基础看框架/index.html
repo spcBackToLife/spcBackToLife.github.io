@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Electron 从零到一搭建--编写基础框架（Electron + React + Mobx + Webpack4 + Typescript） | 秋泽雨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="秋泽雨、全栈开发">
+    <meta name="description" content="秋泽雨的个人小站">
+
+    
+    <link rel="alternative" href="/atom.xml" title="秋泽雨" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">秋泽雨</span>
+                    <span class="description">秋泽雨小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2019/10/16/Electron-从零到一搭建-编写基础看框架/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/10/16/Electron-从零到一搭建-编写基础看框架/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/spcBackToLife/" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/headIcon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Electron 从零到一搭建--编写基础框架（Electron + React + Mobx + Webpack4 + Typescript）</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        秋泽雨 发表于
+        <time datetime="2019-10-16T05:44:07.000Z">2019-10-16</time>
+    </p>
+    <div class="post-content">
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>这篇文章，主要的是讲述如何搭建Electron项目，这里会用到<a href="https://spcbacktolife.github.io/2019/10/16/Webpack4-node-typescript-hotReload/" target="_blank" rel="noopener">上篇文章</a>：<code>Webpack4+node+typescript+hotReload</code> 搭建的<a href="https://github.com/spcBackToLife/node-webpack4-ts-demo" target="_blank" rel="noopener">框架</a>，这里，大家可以先clone下来：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:spcBackToLife/node-webpack4-ts-demo.git</span><br></pre></td></tr></table></figure>
+
+<p>基础框架的搭建主要有以下部分内容，基本每部分都是单独的一篇文章：</p>
+<ul>
+<li>基础<code>node</code>环境搭建: <a href="https://github.com/spcBackToLife/node-webpack4-ts-demo" target="_blank" rel="noopener">webpack4 + node + typescript</a></li>
+<li><code>Electron</code>集成: 单窗口 + 主进程、渲染进程在dev、prod环境的<code>webpack</code>处理。</li>
+<li><code>Electron</code>集成: 多窗口 + 窗口渲染进程<code>webpack</code>处理。</li>
+<li><code>React</code> 集成</li>
+<li><code>Mobx</code> 集成 （由于redux比较重，dva比较麻烦，最后选择Mobx做react状态管理会更合适）<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="Electron-集成-单窗口-主进程、渲染进程在dev、prod环境的webpack处理"><a href="#Electron-集成-单窗口-主进程、渲染进程在dev、prod环境的webpack处理" class="headerlink" title="Electron 集成 - 单窗口 + 主进程、渲染进程在dev、prod环境的webpack处理"></a><code>Electron</code> 集成 - 单窗口 + 主进程、渲染进程在dev、prod环境的<code>webpack</code>处理</h2><p>关于Electron基础集成请看：<a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/" target="_blank" rel="noopener">Electron 入门简介</a>，此处不再累赘，照做就行。</p>
+<ol>
+<li><p>添加<code>Electron</code>依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ yarn add electron@6.0.0 -D</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>src</code>下新建：<code>main-process</code>、<code>render-process</code>文件夹，将main.ts放置到<code>main-process</code>中。</p>
+<ul>
+<li>main-process #主进程文件夹</li>
+<li>render-process #渲染进程文件夹</li>
+</ul>
+<p>关于主进程、渲染进程相关内容，请看文章：<a href="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程.md" target="_blank" rel="noopener">Electron-主进程、渲染进程</a><br>强烈建议先读完这个概念再来看这篇文章下面内容，除非你非常熟悉<code>Electron</code>，已经了解主进程、渲染进程。</p>
+</li>
+<li><p><code>src</code>下新建：<code>index.html</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>electron-sprout<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">            (</span><br><span class="line"><span class="javascript">                <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span> (!process.env.HOT) &#123; <span class="comment">// production环境下，加载打包后的style.css，css处理在webpack里。</span></span></span><br><span class="line"><span class="javascript">                        <span class="keyword">const</span> link = <span class="built_in">document</span>.createElement(<span class="string">'link'</span>);</span></span><br><span class="line"><span class="javascript">                        link.ref = <span class="string">'stylesheet'</span>;</span></span><br><span class="line"><span class="javascript">                        link.href = <span class="string">'../dist/style.css'</span>;</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            )</span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"root"</span>&gt;</span></span><br><span class="line">          先写个hellowold在这，集成react的时候清掉</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">        &#123;   </span><br><span class="line"><span class="javascript">            <span class="keyword">const</span> scripts = [];</span></span><br><span class="line"><span class="javascript">            <span class="keyword">const</span> port = process.env.PORT || <span class="number">1212</span>;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 开发环境下，加载webpack-dev-server下的js。</span></span></span><br><span class="line"><span class="javascript">            <span class="comment">// 生产环境下，加载打包后的js</span></span></span><br><span class="line">            scripts.push(</span><br><span class="line">            (process.env.HOT)</span><br><span class="line"><span class="javascript">                ? <span class="string">'http://localhost:'</span> + port + <span class="string">'/dist/renderer.dev.js'</span></span></span><br><span class="line"><span class="javascript">                : <span class="string">'../dist/renderer.prod.js'</span></span></span><br><span class="line">            );</span><br><span class="line"><span class="javascript">            <span class="comment">// 将需要加载的js写入页面，进行加载。</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">document</span>.write(</span></span><br><span class="line">            scripts</span><br><span class="line"><span class="javascript">                .map(<span class="function"><span class="params">script</span> =&gt;</span> <span class="string">`&lt;script defer src="<span class="subst">$&#123;script&#125;</span>"&gt;&lt;\/script&gt;`</span>)</span></span><br><span class="line"><span class="javascript">                .join(<span class="string">''</span>)</span></span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>main-process</code>目录下新建<code>main-window.ts</code>:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; BrowserWindow &#125; <span class="keyword">from</span> <span class="string">'electron'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> createWindow = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> win = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    show: <span class="literal">true</span>,</span><br><span class="line">    width: <span class="number">890</span>,</span><br><span class="line">    height: <span class="number">556</span>,</span><br><span class="line">    webgl: <span class="literal">true</span>,</span><br><span class="line">    frame: <span class="literal">true</span>,</span><br><span class="line">    transparent: <span class="literal">false</span>,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      webSecurity: <span class="literal">true</span>,</span><br><span class="line">      allowRunningInsecureContent: <span class="literal">false</span>,</span><br><span class="line">      nativeWindowOpen: <span class="literal">false</span>,</span><br><span class="line">      nodeIntegration: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">  win.webContents.openDevTools();</span><br><span class="line">  win.loadURL(<span class="string">`file://<span class="subst">$&#123;__dirname&#125;</span>/../index.html`</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>如上代码所见：我们使用<code>electron</code>提供的<code>BrowserWindow</code>打开了一个系统窗口，这个窗口类似于浏览器的一个<code>tab</code>，可以采用<code>loadURL</code>加载一个网页或者本地文件<code>index.html</code>。api具体信息可以查看<a href="https://electronjs.org/" target="_blank" rel="noopener">Electron 官网</a></p>
+<ol start="5">
+<li>将main.ts的测试代码都删除，换上如下：</li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; app &#125; <span class="keyword">from</span> <span class="string">'electron'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createWindow &#125; <span class="keyword">from</span> <span class="string">'./main-window'</span>;</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'ready'</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  createWindow(); <span class="comment">// 创建一个系统应用窗口</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'window-all-closed'</span>, <span class="function"><span class="params">()</span> =&gt;</span> app.quit()); <span class="comment">// 所有窗口关闭的时候退出应用</span></span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li><p>配置<code>webpack</code>处理主进程、渲染进程js。<br>关于主进程、渲染进程相关内容，请看文章：<a href="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程.md" target="_blank" rel="noopener">Electron-主进程、渲染进程</a></p>
+<p>首先咱来配置个基础的webpack，用于处理，ts\js\css的: <code>webpack.config.base.js</code>，关于<code>webpack</code>相关内容，自己去学哈，没写文章，不学就照我这个配也行，我配的也不专业，哈哈，能用。</p>
+<p>新建文件夹<code>config/webpack</code>,在下面新建文件：<code>webpack.config.base.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MiniCssExtractPlugin = <span class="built_in">require</span>(<span class="string">'mini-css-extract-plugin'</span>);</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> isProd = process.env.NODE_ENV === <span class="string">'production'</span>;</span><br><span class="line"><span class="keyword">const</span> cssLoader = &#123;</span><br><span class="line">  loader: <span class="string">'css-loader'</span>,</span><br><span class="line">  options: &#123;</span><br><span class="line">    modules: <span class="literal">true</span>,</span><br><span class="line">    importLoaders: <span class="number">1</span>,</span><br><span class="line">    localIdentName: <span class="string">'[local]__[hash:6]'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// const CopyWebpackPlugin = require('copy-webpack-plugin');</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  target: <span class="string">'electron-main'</span>, <span class="comment">// 会在主进程和渲染进程文章中提及这个是什么，请看第6点开头的那个文章指向。</span></span><br><span class="line">  resolve: &#123;</span><br><span class="line">    <span class="comment">// changed from extensions: [".js", ".jsx"]</span></span><br><span class="line">    extensions: [<span class="string">'.ts'</span>, <span class="string">'.tsx'</span>, <span class="string">'.js'</span>, <span class="string">'.jsx'</span>], <span class="comment">// 需要处理的文件类型</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.scss$/</span>, <span class="comment">// css loader配置</span></span><br><span class="line">        use: [</span><br><span class="line">          isProd ? MiniCssExtractPlugin.loader : <span class="string">'style-loader'</span>,</span><br><span class="line">          cssLoader,</span><br><span class="line">          <span class="string">'sass-loader'</span>,</span><br><span class="line">        ],</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.tsx?$/</span>, <span class="comment">//tsx处理</span></span><br><span class="line">        exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        use: [</span><br><span class="line"></span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              cacheDirectory: <span class="literal">true</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="comment">// &#123;</span></span><br><span class="line">          <span class="comment">//   loader: 'awesome-typescript-loader',</span></span><br><span class="line">          <span class="comment">// &#125;,</span></span><br><span class="line">        ],</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// Common Image Formats</span></span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(?:ico|gif|png|jpg|jpeg|webp)$/</span>, <span class="comment">// 图片路径处理</span></span><br><span class="line">        use: <span class="string">'url-loader'</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// addition - add source-map support</span></span><br><span class="line">      &#123; <span class="attr">enforce</span>: <span class="string">'pre'</span>, <span class="attr">test</span>: <span class="regexp">/\.js$/</span>, <span class="attr">loader</span>: <span class="string">'source-map-loader'</span> &#125;, <span class="comment">// 报错的source-map</span></span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">  node: &#123;</span><br><span class="line">    __dirname: <span class="literal">false</span>, <span class="comment">// 处理打包后dirname filename变量路径不对问题</span></span><br><span class="line">    __filename: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  devtool: <span class="string">'source-map'</span>,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.ContextReplacementPlugin(<span class="regexp">/moment[/\\]locale$/</span>, /zh-cn/), <span class="comment">// 使用moment组件的话，用这个减少moment库体积，这个作为基础设施的一部分吧</span></span><br><span class="line">    <span class="keyword">new</span> webpack.NamedModulesPlugin(), <span class="comment">// 用于启动HMR（hot module reload）时可以显示模块的相对路径</span></span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>再来处理主进程js。新建文件<code>config/webpack/webpack.config.main.prod.babel.js</code>(关于为什么要区分主进程、渲染进程分别处理js， 第6点提到的那个文章里有哈。),由于主进程开发环境无需做处理，直接可以执行,所以只有<code>production</code>的环境下需要处理js。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</span><br><span class="line"><span class="keyword">const</span> merge = <span class="built_in">require</span>(<span class="string">'webpack-merge'</span>);</span><br><span class="line"><span class="keyword">const</span> TerserPlugin = <span class="built_in">require</span>(<span class="string">'terser-webpack-plugin'</span>);</span><br><span class="line"><span class="keyword">const</span> baseConfig = <span class="built_in">require</span>(<span class="string">'./webpack.config.base'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = merge.smart(baseConfig, &#123;</span><br><span class="line">  devtool: <span class="string">'source-map'</span>,</span><br><span class="line">  mode: <span class="string">'production'</span>,</span><br><span class="line">  entry: <span class="string">'./src/main.ts'</span>,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.join(__dirname, <span class="string">'../../'</span>),</span><br><span class="line">    filename: <span class="string">'./dist/main.prod.js'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  optimization: &#123;</span><br><span class="line">    minimizer: process.env.E2E_BUILD</span><br><span class="line">      ? []</span><br><span class="line">      : [</span><br><span class="line">        <span class="keyword">new</span> TerserPlugin(&#123;  <span class="comment">// 压缩Javascript</span></span><br><span class="line">          parallel: <span class="literal">true</span>,</span><br><span class="line">          sourceMap: <span class="literal">true</span>,</span><br><span class="line">          cache: <span class="literal">true</span>,</span><br><span class="line">        &#125;),</span><br><span class="line">      ],</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.EnvironmentPlugin(&#123;</span><br><span class="line">      NODE_ENV: <span class="string">'production'</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>然后，我们再来处理渲染进程的js，在开发环境下，为了改了代码能够自动刷新页面，热更新，我们用了<code>webpack-dev-server</code>做处理，因此处理渲染进程js的时候会分开发环境和生成环境，有不同的配置文件。首先来生成开发环境的吧。<br>新建文件<code>config/webpack/webpack.config.renderer.dev.babel.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> merge = <span class="built_in">require</span>(<span class="string">'webpack-merge'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; spawn &#125; = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</span><br><span class="line"><span class="keyword">const</span> baseConfig = <span class="built_in">require</span>(<span class="string">'./webpack.config.base'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = process.env.PORT || <span class="number">1212</span>;</span><br><span class="line"><span class="keyword">const</span> publicPath = <span class="string">`http://localhost:<span class="subst">$&#123;port&#125;</span>/dist`</span>;</span><br><span class="line"><span class="built_in">module</span>.exports = merge.smart(baseConfig, &#123;</span><br><span class="line">  devtool: <span class="string">'inline-source-map'</span>,</span><br><span class="line">  mode: <span class="string">'development'</span>,</span><br><span class="line">  target: <span class="string">'electron-renderer'</span>,</span><br><span class="line">  entry: &#123;</span><br><span class="line">    renderer: [</span><br><span class="line">      <span class="built_in">require</span>.resolve(<span class="string">'../../src/render-process/index.tsx'</span>),</span><br><span class="line">      <span class="comment">// 'react-hot-loader/patch', // 集成react的时候再开</span></span><br><span class="line">      <span class="string">`webpack-dev-server/client?http://localhost:<span class="subst">$&#123;port&#125;</span>/`</span>,</span><br><span class="line">      <span class="string">'webpack/hot/only-dev-server'</span>,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    publicPath: <span class="string">`http://localhost:<span class="subst">$&#123;port&#125;</span>/dist`</span>,</span><br><span class="line">    filename: <span class="string">'[name].dev.js'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.NamedModulesPlugin(), <span class="comment">// 用于启动HMR时可以显示模块的相对路径</span></span><br><span class="line">    <span class="keyword">new</span> webpack.HotModuleReplacementPlugin(), <span class="comment">// hot module replacement 启动模块热替换的插件</span></span><br><span class="line">    <span class="keyword">new</span> webpack.NoEmitOnErrorsPlugin(),</span><br><span class="line">    <span class="keyword">new</span> webpack.EnvironmentPlugin(&#123;</span><br><span class="line">      NODE_ENV: <span class="string">'development'</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> webpack.LoaderOptionsPlugin(&#123;</span><br><span class="line">      debug: <span class="literal">true</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    port,</span><br><span class="line">    publicPath,</span><br><span class="line">    compress: <span class="literal">true</span>,</span><br><span class="line">    noInfo: <span class="literal">true</span>,</span><br><span class="line">    stats: <span class="string">'errors-only'</span>,</span><br><span class="line">    inline: <span class="literal">true</span>,</span><br><span class="line">    lazy: <span class="literal">false</span>,</span><br><span class="line">    hot: <span class="literal">true</span>,</span><br><span class="line">    headers: &#123; <span class="string">'Access-Control-Allow-Origin'</span>: <span class="string">'*'</span> &#125;,</span><br><span class="line">    contentBase: path.join(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    watchOptions: &#123;</span><br><span class="line">      aggregateTimeout: <span class="number">300</span>,</span><br><span class="line">      ignored: <span class="regexp">/node_modules/</span>,</span><br><span class="line">      poll: <span class="number">100</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    historyApiFallback: &#123;</span><br><span class="line">      verbose: <span class="literal">true</span>,</span><br><span class="line">      disableDotRule: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    before() &#123;</span><br><span class="line">      <span class="keyword">if</span> (process.env.START_HOT) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Starting Main Process...'</span>);</span><br><span class="line">        spawn(<span class="string">'npm'</span>, [<span class="string">'run'</span>, <span class="string">'start-main-dev'</span>], &#123; <span class="comment">// 在运行这个server之前会运行package.json里的`start-main-dev`指令，文章下面会配置。</span></span><br><span class="line">          shell: <span class="literal">true</span>,</span><br><span class="line">          env: process.env,</span><br><span class="line">          stdio: <span class="string">'inherit'</span>,</span><br><span class="line">        &#125;)</span><br><span class="line">          .on(<span class="string">'close'</span>, code =&gt; process.exit(code))</span><br><span class="line">          .on(<span class="string">'error'</span>, spawnError =&gt; <span class="built_in">console</span>.error(spawnError));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>最后贴一下渲染进程的<code>production</code>环境的webpack吧：<br>新建文件<code>config/webpack/webpack.config.renderer.prod.babel.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</span><br><span class="line"><span class="keyword">const</span> MiniCssExtractPlugin = <span class="built_in">require</span>(<span class="string">'mini-css-extract-plugin'</span>);</span><br><span class="line"><span class="keyword">const</span> OptimizeCSSAssetsPlugin = <span class="built_in">require</span>(<span class="string">'optimize-css-assets-webpack-plugin'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; BundleAnalyzerPlugin &#125; = <span class="built_in">require</span>(<span class="string">'webpack-bundle-analyzer'</span>);</span><br><span class="line"><span class="keyword">const</span> merge = <span class="built_in">require</span>(<span class="string">'webpack-merge'</span>);</span><br><span class="line"><span class="keyword">const</span> TerserPlugin = <span class="built_in">require</span>(<span class="string">'terser-webpack-plugin'</span>);</span><br><span class="line"><span class="keyword">const</span> baseConfig = <span class="built_in">require</span>(<span class="string">'./webpack.config.base'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = merge.smart(baseConfig, &#123;</span><br><span class="line">  devtool: <span class="string">'source-map'</span>,</span><br><span class="line">  mode: <span class="string">'production'</span>,</span><br><span class="line">  target: <span class="string">'electron-renderer'</span>,</span><br><span class="line">  entry: &#123;</span><br><span class="line">    renderer: <span class="built_in">require</span>.resolve(<span class="string">'../../src/render-process/index.tsx'</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.join(__dirname, <span class="string">'..'</span>, <span class="string">'../dist'</span>),</span><br><span class="line">    publicPath: <span class="string">'./dist/'</span>,</span><br><span class="line">    filename: <span class="string">'[name].prod.js'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  optimization: &#123;</span><br><span class="line">    minimizer: process.env.E2E_BUILD</span><br><span class="line">      ? []</span><br><span class="line">      : [</span><br><span class="line">        <span class="keyword">new</span> TerserPlugin(&#123;</span><br><span class="line">          parallel: <span class="literal">true</span>,</span><br><span class="line">          sourceMap: <span class="literal">true</span>,</span><br><span class="line">          cache: <span class="literal">true</span>,</span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> OptimizeCSSAssetsPlugin(&#123;</span><br><span class="line">          cssProcessorOptions: &#123;</span><br><span class="line">            map: &#123;</span><br><span class="line">              inline: <span class="literal">false</span>,</span><br><span class="line">              annotation: <span class="literal">true</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;),</span><br><span class="line">      ],</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.EnvironmentPlugin(&#123;</span><br><span class="line">      NODE_ENV: <span class="string">'production'</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> MiniCssExtractPlugin(&#123;</span><br><span class="line">      filename: <span class="string">'style.css'</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> BundleAnalyzerPlugin(&#123;</span><br><span class="line">      analyzerMode: process.env.OPEN_ANALYZER === <span class="string">'true'</span> ? <span class="string">'server'</span> : <span class="string">'disabled'</span>,</span><br><span class="line">      openAnalyzer: process.env.OPEN_ANALYZER === <span class="string">'true'</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>还记得咱再运行那个demo的时候使用了<code>ts-node ./src/main-process/main.ts</code>运行可以让我们直接用node环境ts。可是目前还没有<code>ts-electron</code>让我们直接用electron运行ts。因此我们需要用babel把我们的运行入口处理下。我们只需要<code>config</code>目录下新建：<code>babel-entry-config.js</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  extensions: [<span class="string">'.js'</span>, <span class="string">'.ts'</span>, <span class="string">'.tsx'</span>],</span><br><span class="line">  presets: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">'@babel/preset-env'</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        targets: &#123; <span class="attr">electron</span>: <span class="built_in">require</span>(<span class="string">'electron/package.json'</span>).version &#125;,</span><br><span class="line">        useBuiltIns: <span class="string">'usage'</span>,</span><br><span class="line">        modules: <span class="string">'commonjs'</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">'@babel/preset-typescript'</span>,</span><br><span class="line">  ],</span><br><span class="line">  plugins: [</span><br><span class="line">    [<span class="string">'@babel/plugin-proposal-decorators'</span>, &#123; <span class="attr">legacy</span>: <span class="literal">true</span> &#125;],</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>然后<code>src</code>下新建文件<code>entry.dev.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'@babel/register'</span>)(<span class="built_in">require</span>(<span class="string">'../config/babel-entry-config'</span>));</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./main-process/main'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>最后咱修改下<code>package.json</code>的运行命令:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="string">"start-main-dev"</span>: <span class="string">"cross-env HOT=1 NODE_ENV=development electron -r @babel/register ./src/entry.dev.js"</span>,</span><br><span class="line"><span class="string">"dev"</span>: <span class="string">"cross-env START_HOT=1 webpack-dev-server --config ./config/webpack/webpack.config.renderer.dev.babel.js"</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>咱还差最后一步就可以运行了，在<code>render-process</code>下新建一个<code>index.tsx</code>。关于<code>render-process</code>新建的tsx是什么意思，请看上面说到的主进程和渲染进程文章：<a href="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程.md" target="_blank" rel="noopener">Electron-主进程、渲染进程</a><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'hello 秋泽雨'</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>搞了半天，咱们终于可以<code>yarn dev</code> 启动一下了，如果猜的没错，咱肯定运行散架，因为还有些上面用到的依赖没装，哈哈：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add cross-env webpack-dev-server webpack-merge mini-css-extract-plugin @babel/register @babel/plugin-proposal-decorators @babel/preset-typescript -D</span><br></pre></td></tr></table></figure>
+
+<p>最后终于可以看到窗口以及窗口加载的html，以及html加载的js输出的<code>console.log</code>: ‘hello 秋泽雨’。</p>
+<p>整体从<code>yarn dev</code>之后的运行流程全解图如下：</p>
+<img src="http://localhost:4000/2019/10/16/Electron-从零到一搭建-编写基础看框架/electron-run-step.png">
+
+<p>此篇demo: <a href="https://github.com/spcBackToLife/electron-sprout/tree/release-191017" target="_blank" rel="noopener">https://github.com/spcBackToLife/electron-sprout/tree/release-191017</a></p>
+<p>有问题欢迎加群沟通哦：<br>  <img src="http://localhost:4000/2019/10/16/Electron-从零到一搭建-编写基础看框架/qq.jpg"></p>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/Electron/">Electron</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Electron/" title="Electron">Electron</a> / 
+    
+        <a href="/tags/webpack4/" title="webpack4">webpack4</a> / 
+    
+        <a href="/tags/node/" title="node">node</a> / 
+    
+        <a href="/tags/typescript/" title="typescript">typescript</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/10/16/Webpack4-node-typescript-hotReload/">
+            
+                Webpack4+node+typescript+hotReload
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/10/15/github-blog/">
+            
+                hexo+github+githubcomment 搭建自己的博客
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'Electron-从零到一搭建-编写基础看框架' || '2019/10/16/Electron-从零到一搭建-编写基础看框架/',
+    owner: 'spcBackToLife',
+    repo: 'spcBackToLife.github.io',
+    clientId: '36f5037c3e1209eaddc1',
+    clientSecret: '038a6d949d922e4d9d0d18d1d7b8c301f175bbab'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Electron/">Electron</a>
+        <span class="badge">(4)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Node/">Node</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/github/">github</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/RabbitMQ/">RabbitMQ</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/项目管理/">项目管理</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Node/Webpack/">Webpack</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Node/Webpack/Typescript/">Typescript</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/博客/" title="博客">博客 (4)</a>
+  
+    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (4)</a>
+  
+    <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
+  
+    <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
+  
+    <a class="tag-item" href="/tags/node/" title="node">node (2)</a>
+  
+    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (2)</a>
+  
+    <a class="tag-item" href="/tags/hotReload/" title="hotReload">hotReload (1)</a>
+  
+    <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
+  
+    <a class="tag-item" href="/tags/comment/" title="comment">comment (1)</a>
+  
+    <a class="tag-item" href="/tags/RabbitMQ/" title="RabbitMQ">RabbitMQ (1)</a>
+  
+    <a class="tag-item" href="/tags/java/" title="java">java (1)</a>
+  
+    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://github.com/spcBackToLife/" target="_blank" title="秋泽雨的github">Github</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2019
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>

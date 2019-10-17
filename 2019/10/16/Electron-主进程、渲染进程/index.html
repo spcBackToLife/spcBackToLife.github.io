@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
     <meta name="baidu-site-verification" content="dIcXMeY8Ya">
     
-    <title>`github`分类下的文章 | 秋泽雨</title>
+    <title>Electron-主进程、渲染进程 | 秋泽雨</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="keywords" content="秋泽雨、全栈开发">
     <meta name="description" content="秋泽雨的个人小站">
@@ -56,11 +56,11 @@
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/categories/github/index.html" class="item ">
+            <li rel="/2019/10/16/Electron-主进程、渲染进程/index.html" class="item ">
                 <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/categories/github/index.html" class="item ">
+            <li rel="/2019/10/16/Electron-主进程、渲染进程/index.html" class="item ">
                 <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
             </li>
             
@@ -103,79 +103,147 @@
     <div class="container body clearfix">
         <section class="content">
             <div class="content-main widget">
-                <!-- 文章分类 -->
-
-    <h3 class="widget-hd">
-        <strong>
-            
-                `github`分类下的文章
-            
-        </strong>
-    </h3>
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="/categories/github/">github</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="http://localhost:4000/2019/10/15/github-blog/">
-    		hexo+github+githubcomment 搭建自己的博客
-    	</a>
-    </h3>
-
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Electron-主进程、渲染进程</span></h3>
     </header>
-    <p class="post-meta">
+    <p class="post-meta text-center">
         秋泽雨 发表于
-        <time datetime="2019-10-15T11:24:52.000Z">2019-10-15</time>
-        &nbsp;&nbsp;
+        <time datetime="2019-10-16T11:16:33.000Z">2019-10-16</time>
+    </p>
+    <div class="post-content">
+        <p>需要讲解什么是主进程、渲染进程<br>webpack如何处理主进程、渲染进程<br>target: ‘electron-renderer’, electron-main是什么意思。如何理解Electron环境<br>主进程、渲染进程如何通信<br>提及remote模块，讲述remote模块机制<br>讲述渲染进程js和窗口的index.html关系</p>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            
+        </span>
         <span class="post-tags">
             标签：
             
-    
-        <a href="/tags/博客/" title="博客">博客</a> / 
-    
-        <a href="/tags/github/" title="github">github</a> / 
-    
-        <a href="/tags/comment/" title="comment">comment</a>
-    
-
         </span>
     </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <h2 id="如何搭建自己的博客"><a href="#如何搭建自己的博客" class="headerlink" title="如何搭建自己的博客"></a>如何搭建自己的博客</h2><ol>
-<li>安装hexo</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init myBlog</span><br><span class="line"><span class="built_in">cd</span> myBlog</span><br><span class="line">yarn install</span><br></pre></td></tr></table></figure>
-            
-            <p class="more">
-                <a href="http://localhost:4000/2019/10/15/github-blog/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://localhost:4000/2019/10/15/github-blog/" title="hexo+github+githubcomment 搭建自己的博客">
-                
-                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
-                
-            </a>
-        </div>
-    </div>
 </article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/10/17/设计模式/">
+            
+                设计模式
+            
+        </a>
+    </span>
+    
 
     
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/10/16/项目管理流程/">
+            
+                项目管理流程
+            
+        </a>
+    </span>
+    
+</div>
 
-    
-    <nav class="page-navigator">
-        <span class="page-number current">1</span>
-    </nav>
-    
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'Electron-主进程、渲染进程' || '2019/10/16/Electron-主进程、渲染进程/',
+    owner: 'spcBackToLife',
+    repo: 'spcBackToLife.github.io',
+    clientId: '36f5037c3e1209eaddc1',
+    clientSecret: '038a6d949d922e4d9d0d18d1d7b8c301f175bbab'
+  });
+  </script>
 
 
             </div>

@@ -123,7 +123,72 @@
         <!-- 文章标题 -->
         
     <h3 class="post-title">
-    	<a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/">
+    	<a href="http://localhost:4000/2019/10/16/Electron-从零到一搭建-编写基础看框架/">
+    		Electron 从零到一搭建--编写基础框架（Electron + React + Mobx + Webpack4 + Typescript）
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-16T05:44:07.000Z">2019-10-16</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Electron/" title="Electron">Electron</a> / 
+    
+        <a href="/tags/webpack4/" title="webpack4">webpack4</a> / 
+    
+        <a href="/tags/node/" title="node">node</a> / 
+    
+        <a href="/tags/typescript/" title="typescript">typescript</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>这篇文章，主要的是讲述如何搭建Electron项目，这里会用到<a href="https://spcbacktolife.github.io/2019/10/16/Webpack4-node-typescript-hotReload/" target="_blank" rel="noopener">上篇文章</a>：<code>Webpack4+node+typescript+hotReload</code> 搭建的<a href="https://github.com/spcBackToLife/node-webpack4-ts-demo" target="_blank" rel="noopener">框架</a>，这里，大家可以先clone下来：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:spcBackToLife/node-webpack4-ts-demo.git</span><br></pre></td></tr></table></figure>
+
+<p>基础框架的搭建主要有以下部分内容，基本每部分都是单独的一篇文章：</p>
+<ul>
+<li>基础<code>node</code>环境搭建: <a href="https://github.com/spcBackToLife/node-webpack4-ts-demo" target="_blank" rel="noopener">webpack4 + node + typescript</a></li>
+<li><code>Electron</code>集成: 单窗口 + 主进程、渲染进程在dev、prod环境的<code>webpack</code>处理。</li>
+<li><code>Electron</code>集成: 多窗口 + 窗口渲染进程<code>webpack</code>处理。</li>
+<li><code>React</code> 集成</li>
+<li><code>Mobx</code> 集成 （由于redux比较重，dva比较麻烦，最后选择Mobx做react状态管理会更合适）</li></ul>
+            
+            <p class="more">
+                <a href="http://localhost:4000/2019/10/16/Electron-从零到一搭建-编写基础看框架/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://localhost:4000/2019/10/16/Electron-从零到一搭建-编写基础看框架/" title="Electron 从零到一搭建--编写基础框架（Electron + React + Mobx + Webpack4 + Typescript）">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/6.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/Electron/">Electron</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="http://localhost:4000/2019/10/15/Electron-入门简介/">
     		Electron 入门简介
     	</a>
     </h3>
@@ -149,88 +214,13 @@
         <div class="post-excerpt">
             
                 <h2 id="Electron-简介"><a href="#Electron-简介" class="headerlink" title="Electron 简介"></a>Electron 简介</h2><p>  <code>Electron</code> 是 <code>跨平台</code> 的桌面应用。<br>  <code>Electron</code> 兼容 Mac, Windows(xp不兼容) 和 Linux。<br>  <code>Electron</code> 基于 <code>Chromium</code> 和 <code>Node.js</code>, 让你可以使用 HTML, CSS 和 JavaScript 构建应用。<br>  <code>Electron</code> 的内核<code>Chromium</code>会随着<code>Electron</code>的版本更新而更新。当然，你也可以自己指定更新内核。（建议跟<code>Electron</code>版本更方便）</p>
-<h2 id="Electron-的开发场景"><a href="#Electron-的开发场景" class="headerlink" title="Electron 的开发场景"></a>Electron 的开发场景</h2><p>  (1) <code>Electron</code> 本地环境搭建（mac、windows）</p>
-<p>  (2) webvidw开发、flash使用与打包</p>
-<p>  (3) webview与渲染进程通信、主进程与渲染进程通信</p>
-<p>  (4) 应用mac、windows打包</p>
-<p>  (5) 多窗口如何开发与打包</p>
-<p>  (6) <code>Electron</code> 自动升级（github 方案、自建服务器方案）</p>
-<p>  (7) mac、windows证书问题，360误报杀毒问题</p>
-<h4 id="Electron-本地环境搭建（mac、windows）"><a href="#Electron-本地环境搭建（mac、windows）" class="headerlink" title="Electron 本地环境搭建（mac、windows）"></a><code>Electron</code> 本地环境搭建（mac、windows）</h4><p>官方教程：<a href="https://electronjs.org/docs/tutorial/development-environment" target="_blank" rel="noopener">https://electronjs.org/docs/tutorial/development-environment</a></p>
-<ol>
-<li><p>mac 环境的搭建</p>
-<p>（1）安装最新版node即可。</p>
-</li>
-<li><p>windows 环境的搭建</p>
-<p>(1) 安装python2.7 (electron需要用到python来打包)</p>
-<pre><code>选择2.7版本进行下载
-https://www.python.org/getit/</code></pre><p>(2) 安装<code>node-gyp</code></p>
-<pre><code>npm install -g node-gyp
-// windows 编译工具（请耐心等待，大概要10-15分钟才行，完成后会有done的提示的）
-npm install --global --production windows-build-tools</code></pre><p>(3) 运行时出现此错误的话： MSBUILD : error MSB4132，无法识别工具版本“2.0” 等（还有提示啥14.0,4.0的都一样）。</p>
-<pre><code>// 此处2015 是电脑上装的2015 ，如果不是，可以看自己电脑是不是2012，
-// 或者不知道怎么看的，直接试试 2012 是不是得行。
-npm install --msvs_version 2015 -g
-npm config set msvs_version 2015 -g</code></pre><p>(4) 打包时候总有包，无论开不开代理都下不下来的话，请如下做：</p>
-<pre><code>复制终端中，下不下来的路径，直接去那个路径（应该是github的路径）下载，
-并将文件拷贝到，如下目录下相关文件夹中，比如nsis的
-C:\Users\pk\AppData\Local\electron-builder\Cache\nsis。</code></pre></li>
-</ol>
-<h4 id="Electron-demo-运行"><a href="#Electron-demo-运行" class="headerlink" title="Electron demo 运行"></a><code>Electron</code> demo 运行</h4><p>  官方示例: <a href="https://electronjs.org/docs/tutorial/first-app" target="_blank" rel="noopener">https://electronjs.org/docs/tutorial/first-app</a></p>
-<ol>
-<li><p>快速搭建与启动方式:</p>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">克隆这仓库</span><br><span class="line">git clone https://github.com/electron/electron-quick-start</span><br><span class="line">进入仓库</span><br><span class="line">cd electron-quick-start</span><br><span class="line">安装依赖库</span><br><span class="line">npm install</span><br><span class="line">运行应用</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>7步带你理解整个过程：</p>
-<pre><code>(1) 新建一个目录: myElectron
-(2) 切到目录下: npm init
-(3) package.json 中增加启动命令，start。文件具体内容如下：
-
-  {
-     &quot;name&quot;: &quot;myelectron&quot;,
-     &quot;version&quot;: &quot;1.0.0&quot;,
-     &quot;description&quot;: &quot;&quot;,
-     &quot;main&quot;: &quot;index.js&quot;,
-     &quot;scripts&quot;: {
-       &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
-       &quot;start&quot;: &quot;electron .&quot;
-     },
-     &quot;author&quot;: &quot;&quot;,
-     &quot;license&quot;: &quot;ISC&quot;
-  }</code></pre><p>   (4) 新建一个index.js，作为启动文件。（注意package.json中配置的也是这个文件哦: <code>&quot;main&quot;: &quot;index.js&quot;</code>）</p>
-<pre><code>const { app, BrowserWindow } = require(&apos;electron&apos;);
-
-function createWindow () {
-  // 创建浏览器窗口
-  let win = new BrowserWindow({ width: 800, height: 600 });
-
-  // 然后加载 app 的 index.html.
-  win.loadFile(&apos;index.html&apos;);
-}
-
-app.on(&apos;ready&apos;, createWindow);</code></pre><p>   (5) 新建index.html 用于呈现桌面应用页面的。</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
-  &lt;title&gt;Hello World!&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  Hellow, World!
-&lt;/body&gt;
-&lt;/html&gt;</code></pre><p>(6) 安装依赖(建议用yarn,因为官方也推荐)</p>
-<pre><code> ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ yarn add electron --save
-(ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install electron --save-dev)</code></pre><p> (7) 运行electron </p>
-<pre><code>yarn start (npm run start)</code></pre></li>
-</ol>
-
             
             <p class="more">
-                <a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/">阅读剩下更多</a>
+                <a href="http://localhost:4000/2019/10/15/Electron-入门简介/">阅读剩下更多</a>
             </p>
         </div>
         <div class="post-thumbnail" data-img="">
-            <a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/" title="Electron 入门简介">
+            <a href="http://localhost:4000/2019/10/15/Electron-入门简介/" title="Electron 入门简介">
                 
                     <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
                 
@@ -250,62 +240,7 @@ app.on(&apos;ready&apos;, createWindow);</code></pre><p>   (5) 新建index.html 
         <!-- 文章标题 -->
         
     <h3 class="post-title">
-    	<a href="https://spcbacktolife.github.io/2019/10/15/Electron windows environment problems/">
-    		Eelectron windows -   MSBUILD : error MSB4132
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        秋泽雨 发表于
-        <time datetime="2019-10-15T06:14:37.000Z">2019-10-15</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="/tags/博客/" title="博客">博客</a> / 
-    
-        <a href="/tags/Electron/" title="Electron">Electron</a> / 
-    
-        <a href="/tags/Problems/" title="Problems">Problems</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>运行时出现此错误的话： MSBUILD : error MSB4132，无法识别工具版本“2.0” 等（还有提示啥14.0,4.0的都一样）。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 此处2015 是电脑上装的2015 ，如果不是，可以看自己电脑是不是2012，</span><br><span class="line">// 或者不知道怎么看的，直接试试 2012 是不是得行。</span><br><span class="line">npm install --global --production windows-build-tools(管理员权限) -- 预计要15分钟左右，耐心等待</span><br><span class="line">npm install --msvs_version 2015 -g</span><br><span class="line">npm config <span class="built_in">set</span> msvs_version 2015 -g</span><br></pre></td></tr></table></figure>
-            
-            <p class="more">
-                <a href="https://spcbacktolife.github.io/2019/10/15/Electron windows environment problems/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="https://spcbacktolife.github.io/2019/10/15/Electron windows environment problems/" title="Eelectron windows -   MSBUILD : error MSB4132">
-                
-                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
-                
-            </a>
-        </div>
-    </div>
-</article>
-
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="/categories/Electron/">Electron</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="https://spcbacktolife.github.io/2019/10/15/Electron-Failed to fetch extension problems/">
+    	<a href="http://localhost:4000/2019/10/15/Electron-Failed to fetch extension problems/">
     		Electron-Failed to fetch extension problems
     	</a>
     </h3>
@@ -341,11 +276,66 @@ app.on(&apos;ready&apos;, createWindow);</code></pre><p>   (5) 新建index.html 
 
             
             <p class="more">
-                <a href="https://spcbacktolife.github.io/2019/10/15/Electron-Failed to fetch extension problems/">阅读剩下更多</a>
+                <a href="http://localhost:4000/2019/10/15/Electron-Failed to fetch extension problems/">阅读剩下更多</a>
             </p>
         </div>
         <div class="post-thumbnail" data-img="">
-            <a href="https://spcbacktolife.github.io/2019/10/15/Electron-Failed to fetch extension problems/" title="Electron-Failed to fetch extension problems">
+            <a href="http://localhost:4000/2019/10/15/Electron-Failed to fetch extension problems/" title="Electron-Failed to fetch extension problems">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/Electron/">Electron</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="http://localhost:4000/2019/10/15/Electron windows environment problems/">
+    		Eelectron windows -   MSBUILD : error MSB4132
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-15T06:14:37.000Z">2019-10-15</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/博客/" title="博客">博客</a> / 
+    
+        <a href="/tags/Electron/" title="Electron">Electron</a> / 
+    
+        <a href="/tags/Problems/" title="Problems">Problems</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>运行时出现此错误的话： MSBUILD : error MSB4132，无法识别工具版本“2.0” 等（还有提示啥14.0,4.0的都一样）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 此处2015 是电脑上装的2015 ，如果不是，可以看自己电脑是不是2012，</span><br><span class="line">// 或者不知道怎么看的，直接试试 2012 是不是得行。</span><br><span class="line">npm install --global --production windows-build-tools(管理员权限) -- 预计要15分钟左右，耐心等待</span><br><span class="line">npm install --msvs_version 2015 -g</span><br><span class="line">npm config <span class="built_in">set</span> msvs_version 2015 -g</span><br></pre></td></tr></table></figure>
+            
+            <p class="more">
+                <a href="http://localhost:4000/2019/10/15/Electron windows environment problems/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://localhost:4000/2019/10/15/Electron windows environment problems/" title="Eelectron windows -   MSBUILD : error MSB4132">
                 
                     <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
                 
@@ -375,7 +365,12 @@ app.on(&apos;ready&apos;, createWindow);</code></pre><p>   (5) 新建index.html 
     
     <li>
         <a href="/categories/Electron/">Electron</a>
-        <span class="badge">(3)</span>
+        <span class="badge">(4)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Node/">Node</a>
+        <span class="badge">(1)</span>
     </li>
     
     <li>
@@ -385,6 +380,21 @@ app.on(&apos;ready&apos;, createWindow);</code></pre><p>   (5) 新建index.html 
     
     <li>
         <a href="/categories/RabbitMQ/">RabbitMQ</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/项目管理/">项目管理</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Node/Webpack/">Webpack</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Node/Webpack/Typescript/">Typescript</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -399,9 +409,17 @@ app.on(&apos;ready&apos;, createWindow);</code></pre><p>   (5) 新建index.html 
   
     <a class="tag-item" href="/tags/博客/" title="博客">博客 (4)</a>
   
-    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (3)</a>
+    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (4)</a>
   
     <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
+  
+    <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
+  
+    <a class="tag-item" href="/tags/node/" title="node">node (2)</a>
+  
+    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (2)</a>
+  
+    <a class="tag-item" href="/tags/hotReload/" title="hotReload">hotReload (1)</a>
   
     <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
   
@@ -410,6 +428,8 @@ app.on(&apos;ready&apos;, createWindow);</code></pre><p>   (5) 新建index.html 
     <a class="tag-item" href="/tags/RabbitMQ/" title="RabbitMQ">RabbitMQ (1)</a>
   
     <a class="tag-item" href="/tags/java/" title="java">java (1)</a>
+  
+    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
   
 </div>
     </section>
