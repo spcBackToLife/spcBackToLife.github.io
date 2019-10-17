@@ -148,20 +148,18 @@
 <p>其实浏览器这个应用本身，是一个进程，打开它就会运行起一个主进程(当然会有其余辅助子进程，暂不考虑),当我们打开一个标签页的时候，就开启了一个渲染进程，大家可以简单的看一下这个图：</p>
 <img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process.png">
 <p>他们之间有这些关系：</p>
-</li>
-<li><p>一个标签页死了，另一个标签页不会死，照常运行</p>
-</li>
-<li><p>一个标签页死了，浏览器不会卡死，还是可以开启其他窗口</p>
-</li>
-<li><p>一个标签页死了，浏览器也会死</p>
+<ul>
+<li>一个标签页死了，另一个标签页不会死，照常运行</li>
+<li>一个标签页死了，浏览器不会卡死，还是可以开启其他窗口</li>
+<li>一个标签页死了，浏览器也会死</li>
+</ul>
 <p>说好的，进程之间互不影响呢，怎么一个标签页死了，还会出现浏览器死了的情况，这就涉及到主进程和渲染进程之间的一个基本关系了。浏览器是主进程，他可以创建标签页这种子进程。就好比，浏览器是地球，一个标签页就是一个人。一个人挂了，地球不会挂。也不会影响另一个人挂不挂，但是假如这个人在挖洞，把地球挖炸了，那其实地球就挂了，所有人也挂了。</p>
 <p>可以看出，主进程会管理（创建、销毁）渲染进程（标签页），有以下特点：</p>
-</li>
-<li><p>渲染进程结束，主进程不会结束（标签页关了，浏览器还在）</p>
-</li>
-<li><p>主进程结束，渲染进程都会结束（浏览器关闭，标签页都会关闭）</p>
-</li>
-<li><p>渲染进程如果太过分，资源用光，也会导致主进程崩溃</p>
+<ul>
+<li>渲染进程结束，主进程不会结束（标签页关了，浏览器还在）</li>
+<li>主进程结束，渲染进程都会结束（浏览器关闭，标签页都会关闭）</li>
+<li>渲染进程如果太过分，资源用光，也会导致主进程崩溃</li>
+</ul>
 <p>接下来我们在<code>Electron</code>里来看一下，进程的特点。<br>首先，我们来新建一个小demo:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir electron-process-test // 新建文件夹electron-process-test</span><br><span class="line"><span class="built_in">cd</span> electron-process-test</span><br><span class="line">npm init </span><br><span class="line">ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ yarn add electron@6.0.9 -D</span><br></pre></td></tr></table></figure>
 
