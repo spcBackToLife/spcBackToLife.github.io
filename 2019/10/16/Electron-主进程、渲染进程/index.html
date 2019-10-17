@@ -114,16 +114,141 @@
         <time datetime="2019-10-16T11:16:33.000Z">2019-10-16</time>
     </p>
     <div class="post-content">
-        <p>需要讲解什么是主进程、渲染进程<br>webpack如何处理主进程、渲染进程<br>target: ‘electron-renderer’, electron-main是什么意思。如何理解Electron环境<br>主进程、渲染进程如何通信<br>提及remote模块，讲述remote模块机制<br>讲述渲染进程js和窗口的index.html关系</p>
+        <p>本文主要有以下内容：</p>
+<ul>
+<li><code>Electron</code>环境</li>
+<li><code>Electron</code> 主进程、渲染进程环境</li>
+<li><code>Electron</code> 主进程、渲染进程</li>
+<li>渲染进程、窗口、index.html之间的关系</li>
+<li><code>webpack</code>如何处理主进程、渲染进程: target: ‘electron-renderer’, electron-main</li>
+<li>神奇的<code>remote</code>-主进程、渲染进程通信</li>
+</ul>
+<p>在看这篇之前，如果你对<code>Electron</code>基础已经了解，则可以继续，如果不了解，建议先看下：</p>
+<ul>
+<li><a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/">Electron 入门简介</a><a id="more"></a>
+
+</li>
+</ul>
+<h2 id="Electron环境"><a href="#Electron环境" class="headerlink" title="Electron环境"></a><code>Electron</code>环境</h2><p>  <code>Electron</code>是一个跨平台的桌面应用技术，从开发的角度，可以<code>片面</code>的理解为js的一个执行环境。比如: 浏览器是js的一个执行环境,node也是js的一个执行环境，同样<code>Electron</code>也是js的一个执行环境。那么什么叫执行环境呢，其实我的理解是一个执行环境包含2个内容：<br>  <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">可解析、执行该语言的解析器</span><br><span class="line">会有一些环境下可运行的基础设施（api）提供给该语言运行</span><br></pre></td></tr></table></figure></p>
+<p>  举个例子： </p>
+<ul>
+<li><p>浏览器里有v8引擎解析执行js, 在window对象上也有丰富的api提供给运行的js使用。符合上述2点。当然离开浏览器，我们可以用node去运行js，但是没法使用浏览器的api。就是因为node环境并不存在那些基础设施。</p>
+</li>
+<li><p><code>node</code>也有v8解析执行js，同时也有丰富的api提供给js使用，比如<code>fs</code>这种，但你在浏览器里运行，则不会有这样的基础设施<code>api</code>可以使用。</p>
+<p>因此，<code>Electron</code>本质上是一个js的执行环境，所以这个环境包含哪些内容呢，请看下图：</p>
+<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron.png">
+<p>可见<code>Electron</code>环境其实包含了<code>浏览器环境</code>、<code>Node环境</code>、<code>系统原生的一些API</code>,包含了<code>浏览器环境</code>、<code>Node环境</code>也就意味着其实也包含了<code>v8</code>语言解释器。因此在<code>Electron</code>里可以运行浏览器的api，node的api，部分系统的api调用。</p>
+<h2 id="Electron-主进程、渲染进程环境"><a href="#Electron-主进程、渲染进程环境" class="headerlink" title="Electron 主进程、渲染进程环境"></a><code>Electron</code> 主进程、渲染进程环境</h2><p>上面我们讲到，<code>Electron</code>其实是js的执行环境，包含<code>浏览器环境</code>、<code>Node环境</code>、<code>系统原生的一些API</code>,那么意味着在<code>Electron</code>里写的js，都可以使用上述三个环境的各种api嘛？当然不是，如果是这样，就会造成混乱。因此，在<code>Electron</code>这个大环境里，又分了js运行的小环境：<code>主进程环境</code>、<code>渲染进程环境</code>。不同环境里，有他们可以执行的api。请看下图：</p>
+<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/process-run-env.png">
+<p>由图可见，在<code>Electron</code>大环境里，分了<code>Main process</code>、<code>Renderer Process</code>环境，不同环境有可执行的不同的api，当然也有共同可以执行的一些api。<code>Main process</code>、<code>Renderer Process</code>环境的相同点是，都会有v8可以解析js,不同点是可以使用的api不全相同。</p>
+<p>那么，有人就会问了，为什么在这个<code>Electron</code>大环境里，还需要去分<code>Main process</code>、<code>Renderer Process</code>两个小环境，去限制不同环境的api调用呢？那接下来大家得知道，在<code>Electron</code>里什么是主进程、渲染进程了，知道这个是什么，才知道为什么要限制他们的运行环境api。</p>
+<h2 id="Electron-主进程、渲染进程"><a href="#Electron-主进程、渲染进程" class="headerlink" title="Electron 主进程、渲染进程"></a><code>Electron</code> 主进程、渲染进程</h2><p>习惯了浏览器的单进程编写，可能接触Electron的”多进程”有点困扰，但还好，在写代码的时候还是单进程的写法。只是需要理解一点进程的东西。<br>通过任务管理器，我们可以看到，其实Electron启动后会有好多进程，除了主进程、渲染进程、还会有一些辅助进程。这里，我们主要描述主进程、渲染进程的作用和意义。</p>
+<p>在这之前，大家可以自己去了解下进程和线程的概念。我就说一个进程的特点：彼此进程是不会共享内存和状态的。举个例子：在浏览器里面，一个Tab页其实就是在单个进程里，2个tab之间不会共享内容，比如tab1网页中的window上挂在一个window.a, 但在tab2中的window上你并不会获得window.a这个变量，因为他们在不同的进程里。这样的一个好处就是，一个Tab死掉了，并不会影响另一个网页的内容，也并不会卡死浏览器。</p>
+<p>基于此，我们会以浏览器这个大家熟悉的东西来理解Electron的主进程、渲染进程，以及他们之间的关系。</p>
+<p>其实浏览器这个应用本身，是一个进程，打开它就会运行起一个主进程(当然会有其余辅助子进程，暂不考虑),当我们打开一个标签页的时候，就开启了一个渲染进程，大家可以简单的看一下这个图：</p>
+<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process.png">
+<p>他们之间有这些关系：</p>
+</li>
+<li><p>一个标签页死了，另一个标签页不会死，照常运行</p>
+</li>
+<li><p>一个标签页死了，浏览器不会卡死，还是可以开启其他窗口</p>
+</li>
+<li><p>一个标签页死了，浏览器也会死</p>
+<p>说好的，进程之间互不影响呢，怎么一个标签页死了，还会出现浏览器死了的情况，这就涉及到主进程和渲染进程之间的一个基本关系了。浏览器是主进程，他可以创建标签页这种子进程。就好比，浏览器是地球，一个标签页就是一个人。一个人挂了，地球不会挂。也不会影响另一个人挂不挂，但是假如这个人在挖洞，把地球挖炸了，那其实地球就挂了，所有人也挂了。</p>
+<p>可以看出，主进程会管理（创建、销毁）渲染进程（标签页），有以下特点：</p>
+</li>
+<li><p>渲染进程结束，主进程不会结束（标签页关了，浏览器还在）</p>
+</li>
+<li><p>主进程结束，渲染进程都会结束（浏览器关闭，标签页都会关闭）</p>
+</li>
+<li><p>渲染进程如果太过分，资源用光，也会导致主进程崩溃</p>
+<p>接下来我们在<code>Electron</code>里来看一下，进程的特点。<br>首先，我们来新建一个小demo:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir electron-process-test // 新建文件夹electron-process-test</span><br><span class="line"><span class="built_in">cd</span> electron-process-test</span><br><span class="line">npm init </span><br><span class="line">ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ yarn add electron@6.0.9 -D</span><br></pre></td></tr></table></figure>
+
+<p>再新建一个<code>main.js</code>, 写入:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>接着我们用<code>electron</code>运行这个js，跟<code>node</code>运行js类似（node main.js）,此处在<code>package.json</code>中添加命令:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="string">"dev"</span>: <span class="string">"electron main.js"</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后运行 <code>yarn dev</code>, 打出了’hello’, 我们在任务管理器可以看到:</p>
+<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process-01.png">
+<p>上述步骤，我们就启动了一个<code>Electron主进程</code>，即图中的带图标的那个<code>Electron</code>进程，他启动了一个额外的辅助进程<code>Electron helper</code>，好像是GPU处理进程，先不管他，我也没了解清楚。主要是那个主进程。<br>接着我们打开一个窗口，这个窗口其实就是一个渲染进程，我们来试一下，在main.js中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">app.on(<span class="string">'ready'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> win = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">400</span>,</span><br><span class="line">    height: <span class="number">400</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>我们再次运行：<code>yarn dev</code>，发现打开了一个窗口，我们在看下任务管理器:</p>
+<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process-01.png">
+<p>还是2个进程，一个<code>Electron</code>, 一个<code>Electron Helper</code>，因为这个窗口在没有加载页面（本地html文件或网页）的时候，不会开启渲染进程。所以我们加载一个页面试试：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">app.on(<span class="string">'ready'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> win = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">400</span>,</span><br><span class="line">    height: <span class="number">400</span></span><br><span class="line">  &#125;);</span><br><span class="line">  win.loadURL(<span class="string">'https://www.baidu.com'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在看任务管理器：</p>
+<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process-02.png">
+<p>发现多了一个<code>Electron Helper</code>, 虽然不知道哪个helper是这个窗口的，因为都叫这个名字，但是这个就是<code>渲染进程</code>了。在一个窗口加载一个页面的时候就会新开一个。<br>我们试试再开一个窗口：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">app.on(<span class="string">'ready'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> win = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">400</span>,</span><br><span class="line">    height: <span class="number">400</span></span><br><span class="line">  &#125;);</span><br><span class="line">  win.loadURL(<span class="string">'https://www.baidu.com'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> win1 = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">400</span>,</span><br><span class="line">    height: <span class="number">400</span></span><br><span class="line">  &#125;);</span><br><span class="line">  win1.loadURL(<span class="string">'https://www.baidu.com'</span>);</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>yarn dev</code> 再看任务管理器, 就会发现又多了一个<code>Electron helper</code>, 多了一个<code>渲染进程</code>：</p>
+<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process-03.png">
+
+<p>以上过程，我们直观感受到了什么是<code>主进程</code>、<code>渲染进程</code>:</p>
+</li>
+<li><p>主进程就是使用<code>electron main.js</code>的时候，就会开启一个主进程:<code>Electron</code>.</p>
+</li>
+<li><p>渲染进程会在新建窗口后，<code>loadURL</code>的时候开始渲染进程:<code>Electron Helper</code>.<br>ps: <code>loadURL</code>也可以加载一个HTML，就跟我们浏览器的Tab差不多了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">win.loadURL(<span class="string">`file://<span class="subst">$&#123;__dirname&#125;</span>/../index.html`</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="渲染进程、窗口、index-html之间的关系"><a href="#渲染进程、窗口、index-html之间的关系" class="headerlink" title="渲染进程、窗口、index.html之间的关系"></a>渲染进程、窗口、index.html之间的关系</h2><p>他们之间有如下关系：</p>
+<ul>
+<li>主进程中<code>new BrowserWindow()</code>会开启一个系统窗口，但不会开启一个独立的进程，窗口由主进程管理。</li>
+<li>窗口可以<code>loadURL</code>加载一个页面，此时会开启这个页面的渲染进程。</li>
+<li>当<code>loadURL</code>加载一个<code>index.html</code>文件的时候，此时渲染进程里运行的就是这个<code>index.html</code>的内容。</li>
+</ul>
+<h2 id="webpack如何处理主进程、渲染进程-target-‘electron-renderer’-electron-main"><a href="#webpack如何处理主进程、渲染进程-target-‘electron-renderer’-electron-main" class="headerlink" title="webpack如何处理主进程、渲染进程: target: ‘electron-renderer’, electron-main"></a><code>webpack</code>如何处理主进程、渲染进程: target: ‘electron-renderer’, electron-main</h2><p>前面，我们讲述了：主进程、渲染进程，以及他们之间的关系，那开发、发布的时候，我们该怎么处理相关的js呢。首先，我们应当有如下概念：</p>
+<ul>
+<li>不同进程的js,肯定是不同的入口，因此采用<code>webpack4</code>的多入口方式打包即可。</li>
+<li>主进程js（就是electron main.js中main.js这个入口相关的js），需要一个生产环境webpack配置文件。因为开发环境下不需要webpack做什么，所以不需要。</li>
+<li>渲染进程js(即index.html里面加载的js)开发环境下需要用webpack-dev-server做热刷新，所以会单独一个webpack配置文件。</li>
+<li>渲染进程js在生产环境下，需要一个webpack配置文件。</li>
+<li>为什么主进程的和渲染进程的js生产环境下不使用同一个配置文件，因为处理方式有些不同，因此不再同一个文件里写多入口方式配置而写成两个文件。</li>
+<li>如果打开两个及以上窗口，即会有很多个渲染进程，则只需要在render的配置文件里使用多入口配置就好了。</li>
+</ul>
+<p>所以会有如下3个配置文件：</p>
+<ul>
+<li>webpack.config.main.prod.js // 主进程生产环境配置文件</li>
+<li>webpack.config.render.prod.js // 渲染进程生产环境配置文件</li>
+<li>webpack.config.render.dev.js // 渲染进程开发环境配置文件</li>
+</ul>
+<p>具体的配置内容，可以看<a href="https://spcbacktolife.github.io/2019/10/16/Electron-从零到一搭建-编写基础看框架/">Electron-从零到一搭建-编写基础看框架</a>。这里我讲一下<code>webpack</code>配置里的：<code>target</code><br>我们比较熟悉的就是在<code>webpack</code>中配置：</p>
+<ul>
+<li>target: ‘node’</li>
+<li>target: ‘web’<br>表示的就是，处理js的时候采用node（采用web）环境去处理，这样，在识别到一些api比如node的<code>fs</code>的时候，就不会报错，知道是什么。<br>同理，我们在处理我们的js的时候也需要根据其运行环境去处理，这样就能识别一些语法、api用法等。</li>
+<li>主进程设置：target: ‘electron-main’</li>
+<li>渲染进程设置：target: ‘electron-renderer’</li>
+</ul>
+<h2 id="神奇的remote-主进程、渲染进程通信"><a href="#神奇的remote-主进程、渲染进程通信" class="headerlink" title="神奇的remote-主进程、渲染进程通信"></a>神奇的<code>remote</code>-主进程、渲染进程通信</h2><p>这个我就不写了，写累了，自己去看下面推荐的文章吧，去体会。</p>
+<p>  此处给大家推荐一些文章去深入了解：</p>
+<ul>
+<li><a href="https://cameronnokes.com/blog/deep-dive-into-electron's-main-and-renderer-processes/" target="_blank" rel="noopener">Deep dive into Electron’s main and renderer processes</a></li>
+<li><a href="https://segmentfault.com/a/1190000007503495" target="_blank" rel="noopener">Electron本质</a></li>
+<li><a href="https://imweb.io/topic/5b3b72ab4d378e703a4f4435" target="_blank" rel="noopener">你不知道的 Electron (一)：神奇的 remote 模块</a></li>
+<li><a href="https://juejin.im/post/5d4b79a3e51d4561b072dcb0#heading-4" target="_blank" rel="noopener">揭开Electron remote模块的神秘面纱</a></li>
+</ul>
 
     </div>
     <p class="post-meta">
         <span class="post-cat">分类：
-            
+            <a class="cat-link" href="/categories/Electron/">Electron</a>
         </span>
         <span class="post-tags">
             标签：
             
+    
+        <a href="/tags/主进程/" title="主进程">主进程</a> / 
+    
+        <a href="/tags/渲染进程/" title="渲染进程">渲染进程</a>
+    
+
         </span>
     </p>
 </article>
@@ -258,7 +383,7 @@
     
     <li>
         <a href="/categories/Electron/">Electron</a>
-        <span class="badge">(4)</span>
+        <span class="badge">(5)</span>
     </li>
     
     <li>
@@ -288,6 +413,11 @@
     
     <li>
         <a href="/categories/Node/Webpack/Typescript/">Typescript</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -323,6 +453,12 @@
     <a class="tag-item" href="/tags/java/" title="java">java (1)</a>
   
     <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
+  
+    <a class="tag-item" href="/tags/主进程/" title="主进程">主进程 (1)</a>
+  
+    <a class="tag-item" href="/tags/渲染进程/" title="渲染进程">渲染进程 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计模式/" title="设计模式">设计模式 (1)</a>
   
 </div>
     </section>
