@@ -202,7 +202,7 @@
 <li>窗口可以<code>loadURL</code>加载一个页面，此时会开启这个页面的渲染进程。</li>
 <li>当<code>loadURL</code>加载一个<code>index.html</code>文件的时候，此时渲染进程里运行的就是这个<code>index.html</code>的内容。</li>
 </ul>
-<h2 id="webpack如何处理主进程、渲染进程-target-‘electron-renderer’-electron-main"><a href="#webpack如何处理主进程、渲染进程-target-‘electron-renderer’-electron-main" class="headerlink" title="webpack如何处理主进程、渲染进程: target: ‘electron-renderer’, electron-main"></a><code>webpack</code>如何处理主进程、渲染进程: target: ‘electron-renderer’, electron-main</h2><p>前面，我们讲述了：主进程、渲染进程，以及他们之间的关系，那开发、发布的时候，我们该怎么处理相关的js呢。首先，我们应当有如下概念：</p>
+<h2 id="webpack如何处理主进程、渲染进程-target-‘electron-renderer’-‘electron-main’"><a href="#webpack如何处理主进程、渲染进程-target-‘electron-renderer’-‘electron-main’" class="headerlink" title="webpack如何处理主进程、渲染进程: target: ‘electron-renderer’, ‘electron-main’"></a><code>webpack</code>如何处理主进程、渲染进程: target: ‘electron-renderer’, ‘electron-main’</h2><p>前面，我们讲述了：主进程、渲染进程，以及他们之间的关系，那开发、发布的时候，我们该怎么处理相关的js呢。首先，我们应当有如下概念：</p>
 <ul>
 <li>不同进程的js,肯定是不同的入口，因此采用<code>webpack4</code>的多入口方式打包即可。</li>
 <li>主进程js（就是electron main.js中main.js这个入口相关的js），需要一个生产环境webpack配置文件。因为开发环境下不需要webpack做什么，所以不需要。</li>
