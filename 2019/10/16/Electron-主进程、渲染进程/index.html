@@ -171,7 +171,7 @@
 
 <p>最后运行 <code>yarn dev</code>, 打出了’hello’, 我们在任务管理器可以看到:</p>
 <img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process-01.png">
-<p>上述步骤，我们就启动了一个<code>Electron主进程</code>，即图中的带图标的那个<code>Electron</code>进程，他启动了一个额外的辅助进程<code>Electron helper</code>，好像是GPU处理进程，先不管他，我也没了解清楚。主要是那个主进程。<br>接着我们打开一个窗口，这个窗口其实就是一个渲染进程，我们来试一下，在main.js中：</p>
+<p>上述步骤，我们就启动了一个<code>Electron主进程</code>，即图中的带图标的那个<code>Electron</code>进程，他启动了一个额外的辅助进程<code>Electron helper</code>，是GPU处理进程。主要是那个主进程。<br>接着我们打开一个窗口，这个窗口其实就是一个渲染进程，我们来试一下，在main.js中：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">app.on(<span class="string">'ready'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> win = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">400</span>,</span><br><span class="line">    height: <span class="number">400</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>我们再次运行：<code>yarn dev</code>，发现打开了一个窗口，我们在看下任务管理器:</p>
@@ -381,7 +381,12 @@
     
     <li>
         <a href="/categories/Electron/">Electron</a>
-        <span class="badge">(5)</span>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React/">React</a>
+        <span class="badge">(1)</span>
     </li>
     
     <li>
@@ -391,6 +396,11 @@
     
     <li>
         <a href="/categories/github/">github</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Mobx/">Mobx</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -430,9 +440,13 @@
   
     <a class="tag-item" href="/tags/博客/" title="博客">博客 (4)</a>
   
-    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (4)</a>
+    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (6)</a>
   
     <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
+  
+    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+  
+    <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
   
     <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
   
@@ -445,6 +459,10 @@
     <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
   
     <a class="tag-item" href="/tags/comment/" title="comment">comment (1)</a>
+  
+    <a class="tag-item" href="/tags/Mobx/" title="Mobx">Mobx (2)</a>
+  
+    <a class="tag-item" href="/tags/React/" title="React">React (2)</a>
   
     <a class="tag-item" href="/tags/RabbitMQ/" title="RabbitMQ">RabbitMQ (1)</a>
   

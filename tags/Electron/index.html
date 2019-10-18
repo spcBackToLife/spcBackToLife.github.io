@@ -123,6 +123,132 @@
         <!-- 文章标题 -->
         
     <h3 class="post-title">
+    	<a href="https://spcbacktolife.github.io/2019/10/18/Electron-react-mobx/">
+    		Electron-react+mobx
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-18T03:45:02.000Z">2019-10-18</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Electron/" title="Electron">Electron</a> / 
+    
+        <a href="/tags/Mobx/" title="Mobx">Mobx</a> / 
+    
+        <a href="/tags/React/" title="React">React</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>此篇接上篇文章: <a href="https://spcbacktolife.github.io/2019/10/16/Electron-从零到一搭建-编写基础看框架/">Electron-从零到一搭建-编写基础看框架</a></p>
+<p>这篇文章主要在此基础上来集成<code>React</code>、<code>Mobx</code>, 大家先拉取下上篇demo: <a href="https://github.com/spcBackToLife/electron-sprout/tree/release-191017" target="_blank" rel="noopener">https://github.com/spcBackToLife/electron-sprout/tree/release-191017</a></p>
+            
+            <p class="more">
+                <a href="https://spcbacktolife.github.io/2019/10/18/Electron-react-mobx/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="https://spcbacktolife.github.io/2019/10/18/Electron-react-mobx/" title="Electron-react+mobx">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/8.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/Electron/">Electron</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="https://spcbacktolife.github.io/2019/10/17/Electron-多窗口设计/">
+    		Electron-多窗口设计
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-17T08:53:08.000Z">2019-10-17</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Electron/" title="Electron">Electron</a> / 
+    
+        <a href="/tags/多窗口/" title="多窗口">多窗口</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>前面，我们提到每个<code>BrowserWindow</code>加载页面后都会是一个独立的渲染进程，那如何处理多窗口的每一个渲染进程的js呢，以及说多窗口的每个<code>BrowserWindow</code>应该如何去写会好些。这里可能不是最好的设计，可供参考。<br>在设计多窗口的东西之前，我们需要知道我们可能有哪些需求：</p>
+<ul>
+<li>每个窗口可能会有窗口需要的数据信息需要缓存，如何缓存。</li>
+<li>可能会需要获取当前激活窗口、激活窗口id、聚焦窗口、聚焦窗口id, 当前有多少个窗口。</li>
+<li>窗口之间可能会互相通信、可能会与主进程通信。</li>
+<li>可以打开不同类型的窗口加载不同内容、可能打开同类型窗口加载不同类容。</li>
+<li>可能同时会想打开几个窗口，可能是打开单个窗口。</li>
+<li>单个窗口的属性可能不一样</li>
+<li>单个窗口一些生命周期可能一样</li>
+<li>有可能从主进程打开或操作窗口、有可能从渲染进程打开或操作窗口</li>
+<li>每个窗口有自己的菜单栏、menubar、touchbar?</li>
+<li>每个窗口有自己不同的右键菜单需求？</li>
+</ul>
+<p>总结一下为：</p>
+<ul>
+<li>单个窗口具有共同的一些属性、一些生命周期监听；具有一些不同的属性、不同的生命周期监听。（右键菜单、menu、touchbar、快捷键？、对话框样式）</li>
+<li>单个窗口或有不同的通信需求：向主进程通信、向其余窗口通信。</li>
+<li>单个窗口或有持久化的缓存，或非持久化缓存。</li>
+<li>对当前窗口的管理需求：多少窗口、聚焦窗口、激活窗口、获得某个窗口、打开某种类型窗口。</li>
+<li>对不同的窗口有不同的操作需求。</li></ul>
+            
+            <p class="more">
+                <a href="https://spcbacktolife.github.io/2019/10/17/Electron-多窗口设计/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="https://spcbacktolife.github.io/2019/10/17/Electron-多窗口设计/" title="Electron-多窗口设计">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/7.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/Electron/">Electron</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
     	<a href="https://spcbacktolife.github.io/2019/10/16/Electron-从零到一搭建-编写基础看框架/">
     		Electron 从零到一搭建--编写基础框架（Electron + React + Mobx + Webpack4 + Typescript）
     	</a>
@@ -159,9 +285,13 @@
 <ul>
 <li>基础<code>node</code>环境搭建: <a href="https://github.com/spcBackToLife/node-webpack4-ts-demo" target="_blank" rel="noopener">webpack4 + node + typescript</a></li>
 <li><code>Electron</code>集成: 单窗口 + 主进程、渲染进程在dev、prod环境的<code>webpack</code>处理。</li>
-<li><code>Electron</code>集成: 多窗口 + 窗口渲染进程<code>webpack</code>处理。</li>
 <li><code>React</code> 集成</li>
-<li><code>Mobx</code> 集成 （由于redux比较重，dva比较麻烦，最后选择Mobx做react状态管理会更合适）</li></ul>
+<li><code>Mobx</code> 集成 （由于redux比较重，dva比较麻烦，最后选择Mobx做react状态管理会更合适）</li>
+<li><code>Electron</code>集成: 多窗口 + 窗口渲染进程<code>webpack</code>处理。</li>
+<li>数据缓存、存储服务管理</li>
+<li>应用基础功能服务设计：录屏、截屏</li>
+<li>应用集成三方环境设计：Python环境</li>
+<li>应用<code>webview</code>注入js设计</li></ul>
             
             <p class="more">
                 <a href="https://spcbacktolife.github.io/2019/10/16/Electron-从零到一搭建-编写基础看框架/">阅读剩下更多</a>
@@ -365,7 +495,12 @@
     
     <li>
         <a href="/categories/Electron/">Electron</a>
-        <span class="badge">(5)</span>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React/">React</a>
+        <span class="badge">(1)</span>
     </li>
     
     <li>
@@ -375,6 +510,11 @@
     
     <li>
         <a href="/categories/github/">github</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Mobx/">Mobx</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -414,9 +554,13 @@
   
     <a class="tag-item" href="/tags/博客/" title="博客">博客 (4)</a>
   
-    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (4)</a>
+    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (6)</a>
   
     <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
+  
+    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+  
+    <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
   
     <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
   
@@ -429,6 +573,10 @@
     <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
   
     <a class="tag-item" href="/tags/comment/" title="comment">comment (1)</a>
+  
+    <a class="tag-item" href="/tags/Mobx/" title="Mobx">Mobx (2)</a>
+  
+    <a class="tag-item" href="/tags/React/" title="React">React (2)</a>
   
     <a class="tag-item" href="/tags/RabbitMQ/" title="RabbitMQ">RabbitMQ (1)</a>
   

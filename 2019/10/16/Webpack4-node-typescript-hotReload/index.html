@@ -135,7 +135,7 @@
 <ol start="2">
 <li>项目根目录下添加ts配置文件: tsconfig.json, 此处默认了一些基础配置，大家可以根据自己需要去看ts文档进行自己需求的配置。</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;compilerOptions&quot;: &#123;</span><br><span class="line">       &quot;strictNullChecks&quot;: true,</span><br><span class="line">       &quot;module&quot;: &quot;commonjs&quot;,</span><br><span class="line">       &quot;esModuleInterop&quot;: true,</span><br><span class="line">       &quot;importHelpers&quot;: true,</span><br><span class="line">       &quot;allowSyntheticDefaultImports&quot;: true,</span><br><span class="line">       &quot;target&quot;: &quot;es5&quot;,</span><br><span class="line">       &quot;lib&quot;: [</span><br><span class="line">        &quot;es2015&quot;</span><br><span class="line">       ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;include&quot;: [</span><br><span class="line">        &quot;src&quot; // write ts in src, you can define your own dir</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="string">"baseUrl"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="string">"paths"</span>: &#123;</span><br><span class="line">    <span class="string">"@/*"</span>: [<span class="string">"./*"</span>]</span><br><span class="line">    &#125;, <span class="comment">// 定义全局路径快捷方式</span></span><br><span class="line">     <span class="string">"strictNullChecks"</span>: <span class="literal">true</span>,</span><br><span class="line">     <span class="string">"module"</span>: <span class="string">"commonjs"</span>,</span><br><span class="line">     <span class="string">"esModuleInterop"</span>: <span class="literal">true</span>,</span><br><span class="line">     <span class="string">"importHelpers"</span>: <span class="literal">true</span>,</span><br><span class="line">     <span class="string">"allowSyntheticDefaultImports"</span>: <span class="literal">true</span>,</span><br><span class="line">     <span class="string">"experimentalDecorators"</span>: <span class="literal">true</span>, <span class="comment">// 允许使用es6装饰器</span></span><br><span class="line">     <span class="string">"target"</span>: <span class="string">"es6"</span>,</span><br><span class="line">     <span class="string">"jsx"</span>: <span class="string">"react"</span>,</span><br><span class="line">     <span class="string">"lib"</span>: [</span><br><span class="line">      <span class="string">"es2017"</span>,</span><br><span class="line">      <span class="string">"dom"</span></span><br><span class="line">     ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"include"</span>: [</span><br><span class="line">      <span class="string">"src"</span><span class="comment">// write ts in src, you can define your own dir</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="使用webpack处理typescript"><a href="#使用webpack处理typescript" class="headerlink" title="使用webpack处理typescript"></a>使用<code>webpack</code>处理<code>typescript</code></h2><ol>
 <li>添加<code>webpack</code>依赖</li>
@@ -333,7 +333,12 @@
     
     <li>
         <a href="/categories/Electron/">Electron</a>
-        <span class="badge">(5)</span>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React/">React</a>
+        <span class="badge">(1)</span>
     </li>
     
     <li>
@@ -343,6 +348,11 @@
     
     <li>
         <a href="/categories/github/">github</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Mobx/">Mobx</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -382,9 +392,13 @@
   
     <a class="tag-item" href="/tags/博客/" title="博客">博客 (4)</a>
   
-    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (4)</a>
+    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (6)</a>
   
     <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
+  
+    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+  
+    <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
   
     <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
   
@@ -397,6 +411,10 @@
     <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
   
     <a class="tag-item" href="/tags/comment/" title="comment">comment (1)</a>
+  
+    <a class="tag-item" href="/tags/Mobx/" title="Mobx">Mobx (2)</a>
+  
+    <a class="tag-item" href="/tags/React/" title="React">React (2)</a>
   
     <a class="tag-item" href="/tags/RabbitMQ/" title="RabbitMQ">RabbitMQ (1)</a>
   
