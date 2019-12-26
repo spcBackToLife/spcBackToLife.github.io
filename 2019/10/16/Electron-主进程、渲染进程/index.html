@@ -136,17 +136,17 @@
 </li>
 <li><p><code>node</code>也有v8解析执行js，同时也有丰富的api提供给js使用，比如<code>fs</code>这种，但你在浏览器里运行，则不会有这样的基础设施<code>api</code>可以使用。</p>
 <p>因此，<code>Electron</code>本质上是一个js的执行环境，所以这个环境包含哪些内容呢，请看下图：</p>
-<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron.png">
+<img src="/.io//10/16/Electron-主进程、渲染进程/electron.png">
 <p>可见<code>Electron</code>环境其实包含了<code>浏览器环境</code>、<code>Node环境</code>、<code>系统原生的一些API</code>,包含了<code>浏览器环境</code>、<code>Node环境</code>也就意味着其实也包含了<code>v8</code>语言解释器。因此在<code>Electron</code>里可以运行浏览器的api，node的api，部分系统的api调用。</p>
 <h2 id="Electron-主进程、渲染进程环境"><a href="#Electron-主进程、渲染进程环境" class="headerlink" title="Electron 主进程、渲染进程环境"></a><code>Electron</code> 主进程、渲染进程环境</h2><p>上面我们讲到，<code>Electron</code>其实是js的执行环境，包含<code>浏览器环境</code>、<code>Node环境</code>、<code>系统原生的一些API</code>,那么意味着在<code>Electron</code>里写的js，都可以使用上述三个环境的各种api嘛？当然不是，如果是这样，就会造成混乱。因此，在<code>Electron</code>这个大环境里，又分了js运行的小环境：<code>主进程环境</code>、<code>渲染进程环境</code>。不同环境里，有他们可以执行的api。请看下图：</p>
-<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/process-run-env.png">
+<img src="/.io//10/16/Electron-主进程、渲染进程/process-run-env.png">
 <p>由图可见，在<code>Electron</code>大环境里，分了<code>Main process</code>、<code>Renderer Process</code>环境，不同环境有可执行的不同的api，当然也有共同可以执行的一些api。<code>Main process</code>、<code>Renderer Process</code>环境的相同点是，都会有v8可以解析js,不同点是可以使用的api不全相同。</p>
 <p>那么，有人就会问了，为什么在这个<code>Electron</code>大环境里，还需要去分<code>Main process</code>、<code>Renderer Process</code>两个小环境，去限制不同环境的api调用呢？那接下来大家得知道，在<code>Electron</code>里什么是主进程、渲染进程了，知道这个是什么，才知道为什么要限制他们的运行环境api。</p>
 <h2 id="Electron-主进程、渲染进程"><a href="#Electron-主进程、渲染进程" class="headerlink" title="Electron 主进程、渲染进程"></a><code>Electron</code> 主进程、渲染进程</h2><p>习惯了浏览器的单进程编写，可能接触Electron的”多进程”有点困扰，但还好，在写代码的时候还是单进程的写法。只是需要理解一点进程的东西。<br>通过任务管理器，我们可以看到，其实Electron启动后会有好多进程，除了主进程、渲染进程、还会有一些辅助进程。这里，我们主要描述主进程、渲染进程的作用和意义。</p>
 <p>在这之前，大家可以自己去了解下进程和线程的概念。我就说一个进程的特点：彼此进程是不会共享内存和状态的。举个例子：在浏览器里面，一个Tab页其实就是在单个进程里，2个tab之间不会共享内容，比如tab1网页中的window上挂在一个window.a, 但在tab2中的window上你并不会获得window.a这个变量，因为他们在不同的进程里。这样的一个好处就是，一个Tab死掉了，并不会影响另一个网页的内容，也并不会卡死浏览器。</p>
 <p>基于此，我们会以浏览器这个大家熟悉的东西来理解Electron的主进程、渲染进程，以及他们之间的关系。</p>
 <p>其实浏览器这个应用本身，是一个进程，打开它就会运行起一个主进程(当然会有其余辅助子进程，暂不考虑),当我们打开一个标签页的时候，就开启了一个渲染进程，大家可以简单的看一下这个图：</p>
-<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process.png">
+<img src="/.io//10/16/Electron-主进程、渲染进程/electron-process.png">
 <p>他们之间有这些关系：</p>
 <ul>
 <li>一个标签页死了，另一个标签页不会死，照常运行</li>
@@ -170,22 +170,22 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="string">"dev"</span>: <span class="string">"electron main.js"</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>最后运行 <code>yarn dev</code>, 打出了’hello’, 我们在任务管理器可以看到:</p>
-<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process-01.png">
+<img src="/.io//10/16/Electron-主进程、渲染进程/electron-process-01.png">
 <p>上述步骤，我们就启动了一个<code>Electron主进程</code>，即图中的带图标的那个<code>Electron</code>进程，他启动了一个额外的辅助进程<code>Electron helper</code>，是GPU处理进程。主要是那个主进程。<br>接着我们打开一个窗口，这个窗口其实就是一个渲染进程，我们来试一下，在main.js中：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">app.on(<span class="string">'ready'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> win = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">400</span>,</span><br><span class="line">    height: <span class="number">400</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>我们再次运行：<code>yarn dev</code>，发现打开了一个窗口，我们在看下任务管理器:</p>
-<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process-01.png">
+<img src="/.io//10/16/Electron-主进程、渲染进程/electron-process-01.png">
 <p>还是2个进程，一个<code>Electron</code>, 一个<code>Electron Helper</code>，因为这个窗口在没有加载页面（本地html文件或网页）的时候，不会开启渲染进程。所以我们加载一个页面试试：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">app.on(<span class="string">'ready'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> win = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">400</span>,</span><br><span class="line">    height: <span class="number">400</span></span><br><span class="line">  &#125;);</span><br><span class="line">  win.loadURL(<span class="string">'https://www.baidu.com'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>在看任务管理器：</p>
-<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process-02.png">
+<img src="/.io//10/16/Electron-主进程、渲染进程/electron-process-02.png">
 <p>发现多了一个<code>Electron Helper</code>, 虽然不知道哪个helper是这个窗口的，因为都叫这个名字，但是这个就是<code>渲染进程</code>了。在一个窗口加载一个页面的时候就会新开一个。<br>我们试试再开一个窗口：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">app.on(<span class="string">'ready'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> win = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">400</span>,</span><br><span class="line">    height: <span class="number">400</span></span><br><span class="line">  &#125;);</span><br><span class="line">  win.loadURL(<span class="string">'https://www.baidu.com'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> win1 = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">400</span>,</span><br><span class="line">    height: <span class="number">400</span></span><br><span class="line">  &#125;);</span><br><span class="line">  win1.loadURL(<span class="string">'https://www.baidu.com'</span>);</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p><code>yarn dev</code> 再看任务管理器, 就会发现又多了一个<code>Electron helper</code>, 多了一个<code>渲染进程</code>：</p>
-<img src="https://spcbacktolife.github.io/2019/10/16/Electron-主进程、渲染进程/electron-process-03.png">
+<img src="/.io//10/16/Electron-主进程、渲染进程/electron-process-03.png">
 
 <p>以上过程，我们直观感受到了什么是<code>主进程</code>、<code>渲染进程</code>:</p>
 </li>
@@ -385,12 +385,27 @@
     </li>
     
     <li>
+        <a href="/categories/vscode/">vscode</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/personal/">personal</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
         <a href="/categories/React/">React</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
         <a href="/categories/Node/">Node</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/模块化学习/">模块化学习</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -405,17 +420,27 @@
     </li>
     
     <li>
+        <a href="/categories/Node/Webpack/">Webpack</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/data-structures/">data structures</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
         <a href="/categories/Mobx/">Mobx</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/项目管理/">项目管理</a>
+        <a href="/categories/复杂度/">复杂度</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/Node/Webpack/">Webpack</a>
+        <a href="/categories/项目管理/">项目管理</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -444,15 +469,29 @@
   
     <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
   
+    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+  
+    <a class="tag-item" href="/tags/vscode/" title="vscode">vscode (1)</a>
+  
+    <a class="tag-item" href="/tags/typings/" title="typings">typings (1)</a>
+  
+    <a class="tag-item" href="/tags/个人成长/" title="个人成长">个人成长 (1)</a>
+  
     <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
   
     <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
   
     <a class="tag-item" href="/tags/node/" title="node">node (2)</a>
   
-    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (2)</a>
+    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (3)</a>
   
     <a class="tag-item" href="/tags/hotReload/" title="hotReload">hotReload (1)</a>
+  
+    <a class="tag-item" href="/tags/amd/" title="amd">amd (1)</a>
+  
+    <a class="tag-item" href="/tags/commonjs/" title="commonjs">commonjs (1)</a>
+  
+    <a class="tag-item" href="/tags/es6/" title="es6">es6 (1)</a>
   
     <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
   
@@ -462,13 +501,17 @@
   
     <a class="tag-item" href="/tags/java/" title="java">java (1)</a>
   
+    <a class="tag-item" href="/tags/data-structures/" title="data structures">data structures (3)</a>
+  
     <a class="tag-item" href="/tags/Mobx/" title="Mobx">Mobx (2)</a>
   
     <a class="tag-item" href="/tags/React/" title="React">React (2)</a>
   
-    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
+    <a class="tag-item" href="/tags/时间复杂度/" title="时间复杂度">时间复杂度 (1)</a>
   
-    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+    <a class="tag-item" href="/tags/空间复杂度/" title="空间复杂度">空间复杂度 (1)</a>
+  
+    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
   
     <a class="tag-item" href="/tags/主进程/" title="主进程">主进程 (1)</a>
   

@@ -119,28 +119,26 @@
     <header>
         <!-- 标签这有且只能显示一个 -->
         
-        <a class="cat-link" href="/categories/RabbitMQ/">RabbitMQ</a>
+        <a class="cat-link" href="/categories/data-structures/">data structures</a>
         
         <!-- 文章标题 -->
         
     <h3 class="post-title">
-    	<a href="https://spcbacktolife.github.io/2019/10/15/rabbitMQ的jar封装/">
-    		rabbitMQ的jar封装
+    	<a href="https://spcbacktolife.github.io/2019/10/28/排序/">
+    		排序
     	</a>
     </h3>
 
     </header>
     <p class="post-meta">
         秋泽雨 发表于
-        <time datetime="2019-10-15T09:53:43.000Z">2019-10-15</time>
+        <time datetime="2019-10-28T11:32:02.000Z">2019-10-28</time>
         &nbsp;&nbsp;
         <span class="post-tags">
             标签：
             
     
-        <a href="/tags/RabbitMQ/" title="RabbitMQ">RabbitMQ</a> / 
-    
-        <a href="/tags/java/" title="java">java</a>
+        <a href="/tags/data-structures/" title="data structures">data structures</a>
     
 
         </span>
@@ -149,21 +147,53 @@
     <div class="post-content">
         <div class="post-excerpt">
             
-                <h2 id="一丶介绍"><a href="#一丶介绍" class="headerlink" title="一丶介绍"></a>一丶介绍</h2><p>​     rabbitMQJar是对rabbitmq的一种jar包封装，使其能简单的被java程序调用。在spring的rabbitTemplate基础上进一步简化使用。此项目参考了<a href="https://github.com/littlersmall/rabbitmq-access项目的多线程消费者与消息重发机制。也非常感谢作者的开源支持。" target="_blank" rel="noopener">https://github.com/littlersmall/rabbitmq-access项目的多线程消费者与消息重发机制。也非常感谢作者的开源支持。</a></p>
-<h2 id="二丶封装功能支持"><a href="#二丶封装功能支持" class="headerlink" title="二丶封装功能支持"></a>二丶封装功能支持</h2><ol>
-<li>支持发送字符串类型消息与java对象消息。</li>
-<li>支持多线程消费者。（固定线程池）</li>
-<li>支持消息重发，保证消息可靠到达。</li>
+                <h2 id="专业术语"><a href="#专业术语" class="headerlink" title="专业术语"></a>专业术语</h2><ul>
+<li>稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面；</li>
+<li>不稳定：如果a原本在b的前面，而a=b，排序之后a可能会出现在b的后面；</li>
+<li>内排序：所有排序操作都在内存中完成；</li>
+<li>外排序：由于数据太大，因此把数据放在磁盘中，而排序通过磁盘和内存的数据传输才能进行；</li>
+<li>时间复杂度： 一个算法执行所耗费的时间。</li>
+<li>空间复杂度：运行完一个程序所需内存的大小。</li>
+</ul>
+<h2 id="各种算法时间复杂度一览表"><a href="#各种算法时间复杂度一览表" class="headerlink" title="各种算法时间复杂度一览表:"></a>各种算法时间复杂度一览表:</h2><p><img src="http://5b0988e595225.cdn.sohucs.com/images/20181217/c4232368dbe44550a4e9ba5ad8eced17.jpeg" alt="复杂度"><br>图片解释:</p>
+<ul>
+<li>n: 数据规模</li>
+<li>k: “桶”的个数</li>
+<li>In-place: 占用常数内存，不占用额外内存</li>
+<li>Out-place: 占用额外内存</li>
+</ul>
+<h2 id="比较排序和非比较排序优劣对比"><a href="#比较排序和非比较排序优劣对比" class="headerlink" title="比较排序和非比较排序优劣对比"></a>比较排序和非比较排序优劣对比</h2><ol>
+<li>分类:<ul>
+<li>比较排序: 快速排序、归并排序、堆排序、冒泡排序</li>
+<li>非比较排序: 计数排序、基数排序、桶排序</li>
+</ul>
+</li>
+<li>优劣:<ul>
+<li>比较排序适用于各种规模的数据，也不在乎数据的分布，都能进行排序。</li>
+<li>非比较排序时间复杂度低，比较排序时间复杂度高。</li>
+<li>但由于非比较排序需要占用空间来确定唯一位置。所以对数据规模和数据分布有一定的要求。</li>
+</ul>
+</li>
+</ol>
+<h2 id="冒泡排序O-n-2"><a href="#冒泡排序O-n-2" class="headerlink" title="冒泡排序O(n^2)"></a>冒泡排序O(n^2)</h2><ol>
+<li>比较数组相邻2个数，若顺序不对，则调整顺序，然后对整个数组进行(n-1)次排序。</li>
+<li>冒第一次，则可以选出数组最大数，冒第二次，则可选出第二大，以此类推。</li>
+<li>可以做一个优化，如果一次比较中，没有做任何交换，则表示已经有序，停止继续。原因是两两比较，如果不是已经有序，不可能不交换。<br><img src="http://5b0988e595225.cdn.sohucs.com/images/20181217/1cf383dd93e34223ae222213ea40397e.gif" alt="冒泡"></li>
+</ol>
+<p>以下均是比较排序:</p>
+<h2 id="选择排序O-n-2"><a href="#选择排序O-n-2" class="headerlink" title="选择排序O(n^2)"></a>选择排序O(n^2)</h2><ol>
+<li>假设第一个数最小，从其余数里找，如果比第一个数小，则替换。</li>
+<li>以此类推，找出所有最小，则拍完序。<br><img src="http://5b0988e595225.cdn.sohucs.com/images/20181217/84babc310fd54189829fbd1b82bd234f.gif" alt="选择"></li>
 </ol>
             
             <p class="more">
-                <a href="https://spcbacktolife.github.io/2019/10/15/rabbitMQ的jar封装/">阅读剩下更多</a>
+                <a href="https://spcbacktolife.github.io/2019/10/28/排序/">阅读剩下更多</a>
             </p>
         </div>
         <div class="post-thumbnail" data-img="">
-            <a href="https://spcbacktolife.github.io/2019/10/15/rabbitMQ的jar封装/" title="rabbitMQ的jar封装">
+            <a href="https://spcbacktolife.github.io/2019/10/28/排序/" title="排序">
                 
-                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/8.jpg" alt="默认配图" >
                 
             </a>
         </div>
@@ -176,28 +206,26 @@
     <header>
         <!-- 标签这有且只能显示一个 -->
         
-        <a class="cat-link" href="/categories/Electron/">Electron</a>
+        <a class="cat-link" href="/categories/data-structures/">data structures</a>
         
         <!-- 文章标题 -->
         
     <h3 class="post-title">
-    	<a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/">
-    		Electron 入门简介
+    	<a href="https://spcbacktolife.github.io/2019/10/28/链表/">
+    		链表
     	</a>
     </h3>
 
     </header>
     <p class="post-meta">
         秋泽雨 发表于
-        <time datetime="2019-10-15T09:52:23.000Z">2019-10-15</time>
+        <time datetime="2019-10-28T10:49:19.000Z">2019-10-28</time>
         &nbsp;&nbsp;
         <span class="post-tags">
             标签：
             
     
-        <a href="/tags/博客/" title="博客">博客</a> / 
-    
-        <a href="/tags/Electron/" title="Electron">Electron</a>
+        <a href="/tags/data-structures/" title="data structures">data structures</a>
     
 
         </span>
@@ -206,16 +234,208 @@
     <div class="post-content">
         <div class="post-excerpt">
             
-                <h2 id="Electron-简介"><a href="#Electron-简介" class="headerlink" title="Electron 简介"></a>Electron 简介</h2><p>  <code>Electron</code> 是 <code>跨平台</code> 的桌面应用。<br>  <code>Electron</code> 兼容 Mac, Windows(xp不兼容) 和 Linux。<br>  <code>Electron</code> 基于 <code>Chromium</code> 和 <code>Node.js</code>, 让你可以使用 HTML, CSS 和 JavaScript 构建应用。<br>  <code>Electron</code> 的内核<code>Chromium</code>会随着<code>Electron</code>的版本更新而更新。当然，你也可以自己指定更新内核。（建议跟<code>Electron</code>版本更方便）</p>
+                <h2 id="抽象数据类型ADT"><a href="#抽象数据类型ADT" class="headerlink" title="抽象数据类型ADT"></a>抽象数据类型ADT</h2><ol>
+<li>一堆数据对象+一些数据操作</li>
+</ol>
+<h2 id="单向链表特点"><a href="#单向链表特点" class="headerlink" title="单向链表特点"></a>单向链表特点</h2><ol>
+<li>链表在内存中非连续存储，来减小插入删除，对象移动上的开销。</li>
+<li>每一个节点都包含其自身元素内容与下一节点的链（next链），最后一个元素next链为null。</li>
+</ol>
+
             
             <p class="more">
-                <a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/">阅读剩下更多</a>
+                <a href="https://spcbacktolife.github.io/2019/10/28/链表/">阅读剩下更多</a>
             </p>
         </div>
         <div class="post-thumbnail" data-img="">
-            <a href="https://spcbacktolife.github.io/2019/10/15/Electron-入门简介/" title="Electron 入门简介">
+            <a href="https://spcbacktolife.github.io/2019/10/28/链表/" title="链表">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/8.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/复杂度/">复杂度</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="https://spcbacktolife.github.io/2019/10/25/时间复杂度、空间复杂度/">
+    		时间复杂度、空间复杂度
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-24T23:44:47.000Z">2019-10-25</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/时间复杂度/" title="时间复杂度">时间复杂度</a> / 
+    
+        <a href="/tags/空间复杂度/" title="空间复杂度">空间复杂度</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><ol>
+<li><p>定义: 写O()来体现算法时间复杂度的记法，我们称之为<code>大0记法</code>。</p>
+</li>
+<li><p>推导大O阶方法: </p>
+<ul>
+<li>用常数1取代运行时间中的所有加法常数。</li>
+<li>在修改后的运行次数函数中，只保留最高阶项。</li>
+<li>如果最高阶项存在且不是1，则去除与这个项目相乘的常数。得到的结果就是大O阶。</li>
+</ul>
+</li>
+<li><p>各种阶:<br>a: 常数阶O(1)<br>O(3) = O(1)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>, n = <span class="number">100</span>; <span class="comment">/*执行一次*/</span></span><br><span class="line">sum = (<span class="number">1</span> + n) * n / <span class="number">2</span>; <span class="comment">/*执行一次*/</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,sum); <span class="comment">/*执行一次*/</span></span><br></pre></td></tr></table></figure></li></ol>
+            
+            <p class="more">
+                <a href="https://spcbacktolife.github.io/2019/10/25/时间复杂度、空间复杂度/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="https://spcbacktolife.github.io/2019/10/25/时间复杂度、空间复杂度/" title="时间复杂度、空间复杂度">
                 
                     <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/data-structures/">data structures</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="https://spcbacktolife.github.io/2019/10/24/Array/">
+    		Array
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-23T23:24:29.000Z">2019-10-24</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/data-structures/" title="data structures">data structures</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <h2 id="数组的基本知识"><a href="#数组的基本知识" class="headerlink" title="数组的基本知识"></a>数组的基本知识</h2><ol>
+<li>基本写法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> intArray[];</span><br><span class="line">intArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> b[] = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;;</span><br><span class="line"><span class="keyword">int</span> b[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;; <span class="comment">// latest java can use this.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> each: b) &#123;</span><br><span class="line">  System.out.println(each);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Student student[] = <span class="keyword">new</span> Student[<span class="number">5</span>];</span><br><span class="line">student[<span class="number">1</span>] = <span class="keyword">new</span> Student(<span class="string">"student1"</span>);</span><br></pre></td></tr></table></figure>
+            
+            <p class="more">
+                <a href="https://spcbacktolife.github.io/2019/10/24/Array/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="https://spcbacktolife.github.io/2019/10/24/Array/" title="Array">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/4.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/personal/">personal</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="https://spcbacktolife.github.io/2019/10/22/I-am-ready-to-go-to-google/">
+    		How to be a goolger
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-22T05:04:56.000Z">2019-10-22</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/个人成长/" title="个人成长">个人成长</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>  当我看完别人在准备google的面试经历之后，深有感触。也许最终的目的地是否能到达并不重要，重要的是这个过程中，会让你更接近你想要成为的那个人。作为程序员，我想，花2年时间来塑造这样的一个自己，没有做什么事情比这更值得的了，因此，在这里我想给自己定个时间。</p>
+<p>  目标: 从2019.10.23日–2021.10.23日，我将追逐成为一个googler</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>目标已学习时间</th>
+<th>实际学习时间</th>
+<th>差值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2019.10.28</td>
+<td>20h</td>
+<td>12h</td>
+<td>-8</td>
+<td>需补上</td>
+</tr>
+</tbody></table>
+            
+            <p class="more">
+                <a href="https://spcbacktolife.github.io/2019/10/22/I-am-ready-to-go-to-google/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="https://spcbacktolife.github.io/2019/10/22/I-am-ready-to-go-to-google/" title="How to be a goolger">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/2.jpg" alt="默认配图" >
                 
             </a>
         </div>
@@ -233,25 +453,25 @@
         <!-- 文章标题 -->
         
     <h3 class="post-title">
-    	<a href="https://spcbacktolife.github.io/2019/10/15/Electron-Failed to fetch extension problems/">
-    		Electron-Failed to fetch extension problems
+    	<a href="https://spcbacktolife.github.io/2019/10/18/Electron-react-mobx/">
+    		Electron-react+mobx
     	</a>
     </h3>
 
     </header>
     <p class="post-meta">
         秋泽雨 发表于
-        <time datetime="2019-10-15T06:14:37.000Z">2019-10-15</time>
+        <time datetime="2019-10-18T03:45:02.000Z">2019-10-18</time>
         &nbsp;&nbsp;
         <span class="post-tags">
             标签：
             
-    
-        <a href="/tags/博客/" title="博客">博客</a> / 
     
         <a href="/tags/Electron/" title="Electron">Electron</a> / 
     
-        <a href="/tags/Problems/" title="Problems">Problems</a>
+        <a href="/tags/Mobx/" title="Mobx">Mobx</a> / 
+    
+        <a href="/tags/React/" title="React">React</a>
     
 
         </span>
@@ -260,22 +480,129 @@
     <div class="post-content">
         <div class="post-excerpt">
             
-                <p>这个是在链接chrome插件的时候访问不到，导致的。可以在应用中取掉此插件, 比如你的应用里有如此代码，就是加载插件(electronInstall)：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">installExtensions</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    process.env.NODE_ENV === <span class="string">'development'</span></span><br><span class="line">    || process.env.DEBUG_PROD === <span class="string">'true'</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">const</span> forceDownload = !!process.env.UPGRADE_EXTENSIONS;</span><br><span class="line">    <span class="keyword">await</span> electronInstall([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS], forceDownload);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>复制：C:\Users\pk\AppData\Roaming\Electron 中的文件到自己电脑中。</p>
-<p>AppData是隐藏文件夹，需要显示了能看哦。</p>
-<p>或者你换个热点、翻个墙，就可以下载chrome插件了。</p>
-
+                <p>此篇接上篇文章: <a href="https://spcbacktolife.github.io/2019/10/16/Electron-从零到一搭建-编写基础看框架/">Electron-从零到一搭建-编写基础看框架</a></p>
+<p>这篇文章主要在此基础上来集成<code>React</code>、<code>Mobx</code>, 大家先拉取下上篇demo: <a href="https://github.com/spcBackToLife/electron-sprout/tree/release-191017" target="_blank" rel="noopener">https://github.com/spcBackToLife/electron-sprout/tree/release-191017</a></p>
             
             <p class="more">
-                <a href="https://spcbacktolife.github.io/2019/10/15/Electron-Failed to fetch extension problems/">阅读剩下更多</a>
+                <a href="https://spcbacktolife.github.io/2019/10/18/Electron-react-mobx/">阅读剩下更多</a>
             </p>
         </div>
         <div class="post-thumbnail" data-img="">
-            <a href="https://spcbacktolife.github.io/2019/10/15/Electron-Failed to fetch extension problems/" title="Electron-Failed to fetch extension problems">
+            <a href="https://spcbacktolife.github.io/2019/10/18/Electron-react-mobx/" title="Electron-react+mobx">
                 
-                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/8.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/Mobx/">Mobx</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="https://spcbacktolife.github.io/2019/10/18/mobx/">
+    		Mobx基础
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-18T03:00:27.000Z">2019-10-18</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/Mobx/" title="Mobx">Mobx</a> / 
+    
+        <a href="/tags/React/" title="React">React</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>这篇文章主要用于学习和上手mobx, 主要有以下内容：</p>
+<ul>
+<li>mobx简介</li>
+<li>mobx核心概念</li>
+<li>mobx Demo: <a href="https://spcbacktolife.github.io/2019/10/18/Electron-react-mobx/">Electron-react-mobx</a></li>
+</ul>
+<p>Mobx中文文档: <a href="https://suprise.gitbooks.io/mobx-cn/content/refguide/api.html" target="_blank" rel="noopener">https://suprise.gitbooks.io/mobx-cn/content/refguide/api.html</a><br>Mobx官网: <a href="https://cn.mobx.js.org/" target="_blank" rel="noopener">https://cn.mobx.js.org/</a><br>Mobx概念: <a href="https://cn.mobx.js.org/intro/concepts.html" target="_blank" rel="noopener">https://cn.mobx.js.org/intro/concepts.html</a></p>
+            
+            <p class="more">
+                <a href="https://spcbacktolife.github.io/2019/10/18/mobx/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="https://spcbacktolife.github.io/2019/10/18/mobx/" title="Mobx基础">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/8.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/React/">React</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="https://spcbacktolife.github.io/2019/10/18/React-学习草稿/">
+    		React-学习草稿
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-18T02:55:30.000Z">2019-10-18</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/react/" title="react">react</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <ol>
+<li>使用纯函数且采用方法调用的形式可以提高性能<br>性能提高不明显的方式:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># app.js</span><br><span class="line"><span class="keyword">import</span> React, &#123; Component, PropTypes &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'../css/app.css'</span></span><br><span class="line"><span class="keyword">import</span> CusImg <span class="keyword">from</span> <span class="string">'./cusimg'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=&#123;styles.haha&#125;&gt;</span><br><span class="line">        &lt;CusImg</span><br><span class="line">          style=&#123;styles.root&#125;</span><br><span class="line">          textStyle=&#123;styles.textStyle&#125;</span><br><span class="line">          imgurl=&#123;<span class="built_in">require</span>(<span class="string">'../imgs/qcord.png'</span>)&#125;</span><br><span class="line">          text=<span class="string">"二维码"</span> /&gt;</span><br><span class="line"></span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+            
+            <p class="more">
+                <a href="https://spcbacktolife.github.io/2019/10/18/React-学习草稿/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="https://spcbacktolife.github.io/2019/10/18/React-学习草稿/" title="React-学习草稿">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/8.jpg" alt="默认配图" >
                 
             </a>
         </div>
@@ -293,25 +620,23 @@
         <!-- 文章标题 -->
         
     <h3 class="post-title">
-    	<a href="https://spcbacktolife.github.io/2019/10/15/Electron windows environment problems/">
-    		Eelectron windows -   MSBUILD : error MSB4132
+    	<a href="https://spcbacktolife.github.io/2019/10/17/Electron-多窗口设计/">
+    		Electron-多窗口设计
     	</a>
     </h3>
 
     </header>
     <p class="post-meta">
         秋泽雨 发表于
-        <time datetime="2019-10-15T06:14:37.000Z">2019-10-15</time>
+        <time datetime="2019-10-17T08:53:08.000Z">2019-10-17</time>
         &nbsp;&nbsp;
         <span class="post-tags">
             标签：
             
     
-        <a href="/tags/博客/" title="博客">博客</a> / 
-    
         <a href="/tags/Electron/" title="Electron">Electron</a> / 
     
-        <a href="/tags/Problems/" title="Problems">Problems</a>
+        <a href="/tags/多窗口/" title="多窗口">多窗口</a>
     
 
         </span>
@@ -320,17 +645,88 @@
     <div class="post-content">
         <div class="post-excerpt">
             
-                <p>运行时出现此错误的话： MSBUILD : error MSB4132，无法识别工具版本“2.0” 等（还有提示啥14.0,4.0的都一样）。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 此处2015 是电脑上装的2015 ，如果不是，可以看自己电脑是不是2012，</span><br><span class="line">// 或者不知道怎么看的，直接试试 2012 是不是得行。</span><br><span class="line">npm install --global --production windows-build-tools(管理员权限) -- 预计要15分钟左右，耐心等待</span><br><span class="line">npm install --msvs_version 2015 -g</span><br><span class="line">npm config <span class="built_in">set</span> msvs_version 2015 -g</span><br></pre></td></tr></table></figure>
+                <p>前面，我们提到每个<code>BrowserWindow</code>加载页面后都会是一个独立的渲染进程，那如何处理多窗口的每一个渲染进程的js呢，以及说多窗口的每个<code>BrowserWindow</code>应该如何去写会好些。这里可能不是最好的设计，可供参考。<br>在设计多窗口的东西之前，我们需要知道我们可能有哪些需求：</p>
+<ul>
+<li>每个窗口可能会有窗口需要的数据信息需要缓存，如何缓存。</li>
+<li>可能会需要获取当前激活窗口、激活窗口id、聚焦窗口、聚焦窗口id, 当前有多少个窗口。</li>
+<li>窗口之间可能会互相通信、可能会与主进程通信。</li>
+<li>可以打开不同类型的窗口加载不同内容、可能打开同类型窗口加载不同类容。</li>
+<li>可能同时会想打开几个窗口，可能是打开单个窗口。</li>
+<li>单个窗口的属性可能不一样</li>
+<li>单个窗口一些生命周期可能一样</li>
+<li>有可能从主进程打开或操作窗口、有可能从渲染进程打开或操作窗口</li>
+<li>每个窗口有自己的菜单栏、menubar、touchbar?</li>
+<li>每个窗口有自己不同的右键菜单需求？</li>
+</ul>
+<p>总结一下为：</p>
+<ul>
+<li>单个窗口具有共同的一些属性、一些生命周期监听；具有一些不同的属性、不同的生命周期监听。（右键菜单、menu、touchbar、快捷键？、对话框样式）</li>
+<li>单个窗口或有不同的通信需求：向主进程通信、向其余窗口通信。</li>
+<li>单个窗口或有持久化的缓存，或非持久化缓存。</li>
+<li>对当前窗口的管理需求：多少窗口、聚焦窗口、激活窗口、获得某个窗口、打开某种类型窗口。</li>
+<li>对不同的窗口有不同的操作需求。</li></ul>
             
             <p class="more">
-                <a href="https://spcbacktolife.github.io/2019/10/15/Electron windows environment problems/">阅读剩下更多</a>
+                <a href="https://spcbacktolife.github.io/2019/10/17/Electron-多窗口设计/">阅读剩下更多</a>
             </p>
         </div>
         <div class="post-thumbnail" data-img="">
-            <a href="https://spcbacktolife.github.io/2019/10/15/Electron windows environment problems/" title="Eelectron windows -   MSBUILD : error MSB4132">
+            <a href="https://spcbacktolife.github.io/2019/10/17/Electron-多窗口设计/" title="Electron-多窗口设计">
                 
-                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/7.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/categories/设计模式/">设计模式</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="https://spcbacktolife.github.io/2019/10/17/设计模式/">
+    		设计模式
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-10-17T02:42:33.000Z">2019-10-17</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/设计模式/" title="设计模式">设计模式</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <h2 id="设计模式概念"><a href="#设计模式概念" class="headerlink" title="设计模式概念"></a>设计模式概念</h2><p>总体来说设计模式分为三大类：</p>
+<p>创建型模式，共五种：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。</p>
+<p>结构型模式，共七种：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。</p>
+<p>行为型模式，共十一种：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</p>
+            
+            <p class="more">
+                <a href="https://spcbacktolife.github.io/2019/10/17/设计模式/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="https://spcbacktolife.github.io/2019/10/17/设计模式/" title="设计模式">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/7.jpg" alt="默认配图" >
                 
             </a>
         </div>
@@ -341,7 +737,7 @@
 
     
     <nav class="page-navigator">
-        <a class="extend prev" rel="prev" href="/archives/2019/">前一页</a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/archives/2019/">前一页</a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2019/page/3/">3</a><a class="extend next" rel="next" href="/archives/2019/page/3/">后一页</a>
     </nav>
     
 
@@ -362,12 +758,27 @@
     </li>
     
     <li>
+        <a href="/categories/vscode/">vscode</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/personal/">personal</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
         <a href="/categories/React/">React</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
         <a href="/categories/Node/">Node</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/模块化学习/">模块化学习</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -382,17 +793,27 @@
     </li>
     
     <li>
+        <a href="/categories/Node/Webpack/">Webpack</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/data-structures/">data structures</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
         <a href="/categories/Mobx/">Mobx</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/项目管理/">项目管理</a>
+        <a href="/categories/复杂度/">复杂度</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/Node/Webpack/">Webpack</a>
+        <a href="/categories/项目管理/">项目管理</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -421,15 +842,29 @@
   
     <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
   
+    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+  
+    <a class="tag-item" href="/tags/vscode/" title="vscode">vscode (1)</a>
+  
+    <a class="tag-item" href="/tags/typings/" title="typings">typings (1)</a>
+  
+    <a class="tag-item" href="/tags/个人成长/" title="个人成长">个人成长 (1)</a>
+  
     <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
   
     <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
   
     <a class="tag-item" href="/tags/node/" title="node">node (2)</a>
   
-    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (2)</a>
+    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (3)</a>
   
     <a class="tag-item" href="/tags/hotReload/" title="hotReload">hotReload (1)</a>
+  
+    <a class="tag-item" href="/tags/amd/" title="amd">amd (1)</a>
+  
+    <a class="tag-item" href="/tags/commonjs/" title="commonjs">commonjs (1)</a>
+  
+    <a class="tag-item" href="/tags/es6/" title="es6">es6 (1)</a>
   
     <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
   
@@ -439,13 +874,17 @@
   
     <a class="tag-item" href="/tags/java/" title="java">java (1)</a>
   
+    <a class="tag-item" href="/tags/data-structures/" title="data structures">data structures (3)</a>
+  
     <a class="tag-item" href="/tags/Mobx/" title="Mobx">Mobx (2)</a>
   
     <a class="tag-item" href="/tags/React/" title="React">React (2)</a>
   
-    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
+    <a class="tag-item" href="/tags/时间复杂度/" title="时间复杂度">时间复杂度 (1)</a>
   
-    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+    <a class="tag-item" href="/tags/空间复杂度/" title="空间复杂度">空间复杂度 (1)</a>
+  
+    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
   
     <a class="tag-item" href="/tags/主进程/" title="主进程">主进程 (1)</a>
   

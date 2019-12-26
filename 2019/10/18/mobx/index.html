@@ -122,6 +122,8 @@
 </ul>
 <p>Mobx中文文档: <a href="https://suprise.gitbooks.io/mobx-cn/content/refguide/api.html" target="_blank" rel="noopener">https://suprise.gitbooks.io/mobx-cn/content/refguide/api.html</a><br>Mobx官网: <a href="https://cn.mobx.js.org/" target="_blank" rel="noopener">https://cn.mobx.js.org/</a><br>Mobx概念: <a href="https://cn.mobx.js.org/intro/concepts.html" target="_blank" rel="noopener">https://cn.mobx.js.org/intro/concepts.html</a></p>
 <a id="more"></a>
+
+
 <h2 id="mobx简介"><a href="#mobx简介" class="headerlink" title="mobx简介"></a>mobx简介</h2><p>mobx通过透明的函数响应式编程(transparently applying functional reactive programming - TFRP)使得状态管理变得简单和可扩展。MobX背后的哲学很简单:<br><code>任何源自应用状态的东西都应该自动地获得。</code><br>React 和 MobX 是一对强力组合。React 通过提供机制把应用状态转换为可渲染组件树并对其进行渲染。而MobX提供机制来存储和更新应用状态供 React 使用。<br><img src="https://cn.mobx.js.org/flow.png" alt="状态图"><br>接下来我们会来先了解下核心概念和写法，最后结合一个demo来理解其作用和使用。</p>
 <h2 id="核心概念-Observable-state-可观察的状态"><a href="#核心概念-Observable-state-可观察的状态" class="headerlink" title="核心概念 - Observable state(可观察的状态)"></a>核心概念 - Observable state(可观察的状态)</h2><ol>
 <li><p>MobX 为现有的数据结构(如对象，数组和类实例)添加了可观察的功能,有2种方式：<br>（1）注解方式</p>
@@ -130,39 +132,38 @@
 <p>（2）非注解方式</p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; decorate, observable &#125; <span class="keyword">from</span> <span class="string">"mobx"</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Todo</span> </span>&#123;</span><br><span class="line">    id = <span class="built_in">Math</span>.random();</span><br><span class="line">    title = <span class="string">""</span>;</span><br><span class="line">    finished = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">decorate(Todo, &#123;</span><br><span class="line">    title: observable,</span><br><span class="line">    finished: observable</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<h2 id="核心概念-Computed-values-计算值"><a href="#核心概念-Computed-values-计算值" class="headerlink" title="核心概念 - Computed values(计算值)"></a>核心概念 - Computed values(计算值)</h2><p>作用: 当相关数据变化后，与其相关的数据值如果使用了<code>@computed</code>则会自动更新。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoList</span> </span>&#123;</span><br><span class="line">  @observable todos = [];</span><br><span class="line">  @computed <span class="keyword">get</span> unfinishedTodoCount() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.todos.filter(<span class="function"><span class="params">todo</span> =&gt;</span> !todo.finished).length;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当<code>todos</code>数组变化后，<code>unfinishedTodoCount</code>得到的结果也会自动变化。<code>只有在需要他们的时候，他们才会自动更新。</code></p>
 </li>
 </ol>
-<h2 id="核心概念-Reactions-反应"><a href="#核心概念-Reactions-反应" class="headerlink" title="核心概念 - Reactions(反应)"></a>核心概念 - Reactions(反应)</h2><p>  Reactions 和计算值很像，但它不是产生一个新的值，而是会产生一些副作用，reactions 在 响应式编程和命令式编程之间建立沟通的桥梁。<br>  使用autorun、reaction 和 when 函数即可简单的创建自定义 reactions，以满足你的具体场景。<br>  简而言之：状态改变后，触发一些你想触发的动作，比如打印日志等，就叫做Reactions(反应)</p>
+<h2 id="核心概念-Computed-values-计算值"><a href="#核心概念-Computed-values-计算值" class="headerlink" title="核心概念 - Computed values(计算值)"></a>核心概念 - Computed values(计算值)</h2><p>  作用: 当相关数据变化后，与其相关的数据值如果使用了<code>@computed</code>则会自动更新。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoList</span> </span>&#123;</span><br><span class="line">  @observable todos = [];</span><br><span class="line">  @computed <span class="keyword">get</span> unfinishedTodoCount() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.todos.filter(<span class="function"><span class="params">todo</span> =&gt;</span> !todo.finished).length;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  当<code>todos</code>数组变化后，<code>unfinishedTodoCount</code>得到的结果也会自动变化。<code>只有在需要他们的时候，他们才会自动更新。</code></p>
+<h2 id="核心概念-Reactions-反应"><a href="#核心概念-Reactions-反应" class="headerlink" title="核心概念 - Reactions(反应)"></a>核心概念 - Reactions(反应)</h2><p>Reactions 和计算值很像，但它不是产生一个新的值，而是会产生一些副作用，reactions 在 响应式编程和命令式编程之间建立沟通的桥梁。<br>使用autorun、reaction 和 when 函数即可简单的创建自定义 reactions，以满足你的具体场景。<br>简而言之：状态改变后，触发一些你想触发的动作，比如打印日志等，就叫做Reactions(反应)</p>
 <h2 id="核心概念-Actions-动作"><a href="#核心概念-Actions-动作" class="headerlink" title="核心概念 - Actions(动作)"></a>核心概念 - Actions(动作)</h2><ol>
-<li><p>状态应该以某种方式来更新， 动作是一段可以改变状态的代码。</p>
+<li>状态应该以某种方式来更新， 动作是一段可以改变状态的代码。</li>
+</ol>
 <h2 id="核心概念-Derivations-衍生"><a href="#核心概念-Derivations-衍生" class="headerlink" title="核心概念 - Derivations(衍生)"></a>核心概念 - Derivations(衍生)</h2><p>任何 源自状态并且不会再有任何进一步的相互作用的东西就是衍生。 衍生以多种形式存在:</p>
 <ul>
 <li>用户界面</li>
 <li>衍生数据，比如剩下的待办事项的数量。</li>
-<li>后端集成，比如把变化发送到服务器端。<br>MobX 区分了两种类型的衍生:</li>
+<li>后端集成，比如把变化发送到服务器端。</li>
+</ul>
+<p>MobX 区分了两种类型的衍生:</p>
+<ul>
 <li>Computed values(计算值) - 它们是永远可以使用纯函数(pure function)从当前可观察状态中衍生出的值。</li>
 <li>Reactions(反应) - Reactions 是当状态改变时需要自动发生的副作用。需要有一个桥梁来连接命令式编程(imperative programming)和响应式编程(reactive programming)。或者说得更明确一些，它们最终都需要实现I / O 操作。</li>
 </ul>
 <p><code>黄金法则: 如果你想创建一个基于当前状态的值时，请使用 computed</code></p>
-<h2 id="Mobx原则"><a href="#Mobx原则" class="headerlink" title="Mobx原则"></a>Mobx原则</h2></li>
-<li><p>MobX 支持单向数据流，也就是<code>动作</code>改变<code>状态</code>，而<code>状态</code>的改变会<code>更新所有受影响的视图</code>。<br><img src="https://cn.mobx.js.org/images/action-state-view.png" alt="原则"></p>
-</li>
-<li><p>当状态改变时，所有衍生都会进行原子级的自动更新。因此永远不可能观察到中间值。</p>
-</li>
-<li><p>所有<code>衍生</code>默认都是<code>同步更新</code>。这意味着例如动作可以在改变状态之后直接可以安全地检查<code>计算值</code>。</p>
-</li>
-<li><p><code>计算值</code>是延迟更新的。任何<code>不在使用状态的计算值将不会更新</code>，直到需要它进行副作用（I / O）操作时。 如果视图不再使用，那么它会自动被垃圾回收。</p>
-</li>
-<li><p>所有的计算值都应该是纯净的。它们不应该用来改变状态。</p>
+<h2 id="Mobx原则"><a href="#Mobx原则" class="headerlink" title="Mobx原则"></a>Mobx原则</h2><ol>
+<li>MobX 支持单向数据流，也就是<code>动作</code>改变<code>状态</code>，而<code>状态</code>的改变会<code>更新所有受影响的视图</code>。<br><img src="https://cn.mobx.js.org/images/action-state-view.png" alt="原则"></li>
+<li>当状态改变时，所有衍生都会进行原子级的自动更新。因此永远不可能观察到中间值。</li>
+<li>所有<code>衍生</code>默认都是<code>同步更新</code>。这意味着例如动作可以在改变状态之后直接可以安全地检查<code>计算值</code>。</li>
+<li><code>计算值</code>是延迟更新的。任何<code>不在使用状态的计算值将不会更新</code>，直到需要它进行副作用（I / O）操作时。 如果视图不再使用，那么它会自动被垃圾回收。</li>
+<li>所有的计算值都应该是纯净的。它们不应该用来改变状态。</li>
+</ol>
 <h2 id="mobx-Demo"><a href="#mobx-Demo" class="headerlink" title="mobx Demo"></a>mobx Demo</h2><p>估计上面会看的一脸懵逼，看个demo就理解了：<a href="https://spcbacktolife.github.io/2019/10/18/Electron-react-mobx/">Electron-react-mobx</a></p>
 <p>有问题欢迎加群沟通哦：</p>
-<img src="https://spcbacktolife.github.io/2019/10/18/mobx/qq.jpg"></li>
-</ol>
-
+<img src="/.io//10/18/mobx/qq.jpg">
     </div>
     <p class="post-meta">
         <span class="post-cat">分类：
@@ -315,12 +316,27 @@
     </li>
     
     <li>
+        <a href="/categories/vscode/">vscode</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/personal/">personal</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
         <a href="/categories/React/">React</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
         <a href="/categories/Node/">Node</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/模块化学习/">模块化学习</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -335,17 +351,27 @@
     </li>
     
     <li>
+        <a href="/categories/Node/Webpack/">Webpack</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/data-structures/">data structures</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
         <a href="/categories/Mobx/">Mobx</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/项目管理/">项目管理</a>
+        <a href="/categories/复杂度/">复杂度</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/Node/Webpack/">Webpack</a>
+        <a href="/categories/项目管理/">项目管理</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -374,15 +400,29 @@
   
     <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
   
+    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+  
+    <a class="tag-item" href="/tags/vscode/" title="vscode">vscode (1)</a>
+  
+    <a class="tag-item" href="/tags/typings/" title="typings">typings (1)</a>
+  
+    <a class="tag-item" href="/tags/个人成长/" title="个人成长">个人成长 (1)</a>
+  
     <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
   
     <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
   
     <a class="tag-item" href="/tags/node/" title="node">node (2)</a>
   
-    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (2)</a>
+    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (3)</a>
   
     <a class="tag-item" href="/tags/hotReload/" title="hotReload">hotReload (1)</a>
+  
+    <a class="tag-item" href="/tags/amd/" title="amd">amd (1)</a>
+  
+    <a class="tag-item" href="/tags/commonjs/" title="commonjs">commonjs (1)</a>
+  
+    <a class="tag-item" href="/tags/es6/" title="es6">es6 (1)</a>
   
     <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
   
@@ -392,13 +432,17 @@
   
     <a class="tag-item" href="/tags/java/" title="java">java (1)</a>
   
+    <a class="tag-item" href="/tags/data-structures/" title="data structures">data structures (3)</a>
+  
     <a class="tag-item" href="/tags/Mobx/" title="Mobx">Mobx (2)</a>
   
     <a class="tag-item" href="/tags/React/" title="React">React (2)</a>
   
-    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
+    <a class="tag-item" href="/tags/时间复杂度/" title="时间复杂度">时间复杂度 (1)</a>
   
-    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+    <a class="tag-item" href="/tags/空间复杂度/" title="空间复杂度">空间复杂度 (1)</a>
+  
+    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
   
     <a class="tag-item" href="/tags/主进程/" title="主进程">主进程 (1)</a>
   

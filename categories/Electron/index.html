@@ -354,7 +354,8 @@
 <li>数据缓存、存储服务管理</li>
 <li>应用基础功能服务设计：录屏、截屏</li>
 <li>应用集成三方环境设计：Python环境</li>
-<li>应用<code>webview</code>注入js设计</li></ul>
+<li>应用<code>webview</code>注入js设计</li>
+<li>运行日志集成</li></ul>
             
             <p class="more">
                 <a href="https://spcbacktolife.github.io/2019/10/16/Electron-从零到一搭建-编写基础看框架/">阅读剩下更多</a>
@@ -461,7 +462,7 @@
         <div class="post-excerpt">
             
                 <p>运行时出现此错误的话： MSBUILD : error MSB4132，无法识别工具版本“2.0” 等（还有提示啥14.0,4.0的都一样）。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 此处2015 是电脑上装的2015 ，如果不是，可以看自己电脑是不是2012，</span><br><span class="line">// 或者不知道怎么看的，直接试试 2012 是不是得行。</span><br><span class="line">npm install --global --production windows-build-tools(管理员权限) -- 预计要15分钟左右，耐心等待</span><br><span class="line">npm install --msvs_version 2015 -g</span><br><span class="line">npm config <span class="built_in">set</span> msvs_version 2015 -g</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 此处2015 是电脑上装的2015 ，如果不是，可以看自己电脑是不是2012，</span><br><span class="line">// 或者不知道怎么看的，直接试试 2012 是不是得行。</span><br><span class="line">npm install --global --production windows-build-tools(管理员权限) -- 预计要15分钟左右，耐心等待</span><br><span class="line">npm install --msvs_version 2015 -g</span><br><span class="line">npm config <span class="built_in">set</span> msvs_version 2015 -g</span><br><span class="line">// 卸载中打开：visual studio 15 生成工具2017 , 点击修改，右侧选择适用于桌面的VC++2015.3v1400</span><br></pre></td></tr></table></figure>
             
             <p class="more">
                 <a href="https://spcbacktolife.github.io/2019/10/15/Electron windows environment problems/">阅读剩下更多</a>
@@ -562,12 +563,27 @@
     </li>
     
     <li>
+        <a href="/categories/vscode/">vscode</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/personal/">personal</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
         <a href="/categories/React/">React</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
         <a href="/categories/Node/">Node</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/模块化学习/">模块化学习</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -582,17 +598,27 @@
     </li>
     
     <li>
+        <a href="/categories/Node/Webpack/">Webpack</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/data-structures/">data structures</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
         <a href="/categories/Mobx/">Mobx</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/项目管理/">项目管理</a>
+        <a href="/categories/复杂度/">复杂度</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/Node/Webpack/">Webpack</a>
+        <a href="/categories/项目管理/">项目管理</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -621,15 +647,29 @@
   
     <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
   
+    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+  
+    <a class="tag-item" href="/tags/vscode/" title="vscode">vscode (1)</a>
+  
+    <a class="tag-item" href="/tags/typings/" title="typings">typings (1)</a>
+  
+    <a class="tag-item" href="/tags/个人成长/" title="个人成长">个人成长 (1)</a>
+  
     <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
   
     <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
   
     <a class="tag-item" href="/tags/node/" title="node">node (2)</a>
   
-    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (2)</a>
+    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (3)</a>
   
     <a class="tag-item" href="/tags/hotReload/" title="hotReload">hotReload (1)</a>
+  
+    <a class="tag-item" href="/tags/amd/" title="amd">amd (1)</a>
+  
+    <a class="tag-item" href="/tags/commonjs/" title="commonjs">commonjs (1)</a>
+  
+    <a class="tag-item" href="/tags/es6/" title="es6">es6 (1)</a>
   
     <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
   
@@ -639,13 +679,17 @@
   
     <a class="tag-item" href="/tags/java/" title="java">java (1)</a>
   
+    <a class="tag-item" href="/tags/data-structures/" title="data structures">data structures (3)</a>
+  
     <a class="tag-item" href="/tags/Mobx/" title="Mobx">Mobx (2)</a>
   
     <a class="tag-item" href="/tags/React/" title="React">React (2)</a>
   
-    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
+    <a class="tag-item" href="/tags/时间复杂度/" title="时间复杂度">时间复杂度 (1)</a>
   
-    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+    <a class="tag-item" href="/tags/空间复杂度/" title="空间复杂度">空间复杂度 (1)</a>
+  
+    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
   
     <a class="tag-item" href="/tags/主进程/" title="主进程">主进程 (1)</a>
   

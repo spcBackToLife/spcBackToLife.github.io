@@ -118,6 +118,85 @@
     <header>
         <!-- 标签这有且只能显示一个 -->
         
+            <a href="javascript: void(0);" class="cat">未分类</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="https://spcbacktolife.github.io/2019/12/05/typescript-注解/">
+    		typescript-注解
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        秋泽雨 发表于
+        <time datetime="2019-12-05T02:23:25.000Z">2019-12-05</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/typescript/" title="typescript">typescript</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><p>  Typescript和Es6引入了类的概念，也有类装饰器这样的东西，ts已作为试验性特性予以支持。</p>
+<p>  ps: 文档：<a href="https://www.w3cschool.cn/typescript/typescript-decorators.html" target="_blank" rel="noopener">https://www.w3cschool.cn/typescript/typescript-decorators.html</a><br>      操练场：<a href="https://www.typescriptlang.org/play/index.html?experimentalDecorators=true#code/" target="_blank" rel="noopener">https://www.typescriptlang.org/play/index.html?experimentalDecorators=true#code/</a></p>
+<h2 id="装饰器工厂"><a href="#装饰器工厂" class="headerlink" title="装饰器工厂"></a>装饰器工厂</h2>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">color</span>(<span class="params">value: string</span>) </span>&#123; <span class="comment">// 这是一个装饰器工厂</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target</span>) </span>&#123; <span class="comment">//  这是装饰器,target属于被装饰对象</span></span><br><span class="line">        <span class="comment">// do something with "target" and "value"...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="装饰器特点"><a href="#装饰器特点" class="headerlink" title="装饰器特点"></a>装饰器特点</h2><ul>
+<li>多个装饰器可以同时应用到同一个声明上（1. 由上至下依次对装饰器表达式求值。2.求值的结果会被当作函数，由下至上依次调用。）</li>
+<li></li>
+</ul>
+<h2 id="类装饰器"><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h2><p> 装饰在类身上的，可以监控类的属性变化，或者给类注入属性,例如一下例子，我们为这个类增加了工具方法来打日志，从而对日志这个方法进行一个总控制。</p>
+<ul>
+<li><p>装饰器参数：为类的构造函数本身。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">value: string</span>) </span>&#123; </span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">constructor: Function</span>) </span>&#123; </span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'run when load this js'</span>);</span><br><span class="line">          <span class="keyword">constructor</span>.prototype.logInfo = function (message: string) &#123;</span><br><span class="line">              <span class="built_in">console</span>.log(<span class="string">`log-<span class="subst">$&#123;value&#125;</span>`</span>, message);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  @log(<span class="string">'info'</span>)</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> </span>&#123;</span><br><span class="line">      greeting: string;</span><br><span class="line">      <span class="keyword">constructor</span>(message: string) &#123;</span><br><span class="line">          <span class="keyword">this</span>.greeting = message;</span><br><span class="line">      &#125;</span><br><span class="line">      greet() &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'greet'</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="string">"Hello, "</span> + <span class="keyword">this</span>.greeting;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> greeter = <span class="keyword">new</span> Greeter(<span class="string">'1'</span>);</span><br><span class="line">  greeter.greet();</span><br><span class="line">  greeter.logInfo(<span class="string">'今天天气不错'</span>);</span><br><span class="line"></span><br><span class="line">---- 运行结果入下</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>:<span class="number">10</span> run when load <span class="keyword">this</span> js</span><br><span class="line">  <span class="built_in">console</span>:<span class="number">21</span> greet</span><br><span class="line">  <span class="built_in">console</span>:<span class="number">12</span> log-info 今天天气不错</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法装饰器"><a href="#方法装饰器" class="headerlink" title="方法装饰器"></a>方法装饰器</h2></li>
+<li><p>可以在执行方法前后切面做一些事情AOP</p>
+</li>
+<li><p>参数：<br>对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。<br>成员的名字。<br>成员的属性描述符。</p>
+</li>
+<li><p>有个问题不是很理解：为什么装饰器重写方法后返回<code>target[propertyKey]</code>或者<code>target</code>就可以覆盖原方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// aop 写法可以控制方法前后</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">value: string</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target: any, propertyKey: string, descriptor: PropertyDescriptor</span>) </span>&#123; </span><br><span class="line">      <span class="comment">// console.log('params:', target, propertyKey, descriptor);</span></span><br><span class="line">        <span class="keyword">const</span> origin = target[propertyKey];</span><br><span class="line">      <span class="comment">// aop</span></span><br><span class="line">      target[propertyKey] = <span class="function"><span class="keyword">function</span>(<span class="params">...args: any[]</span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'before method run'</span>)</span><br><span class="line">          <span class="keyword">let</span> result = origin.apply(<span class="keyword">this</span>, args)</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'after method run'</span>)</span><br><span class="line">          <span class="keyword">return</span> result;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> target[propertyKey];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> </span>&#123;</span><br><span class="line">    greeting: string;</span><br><span class="line">    <span class="keyword">constructor</span>(message: string) &#123;</span><br><span class="line">        <span class="keyword">this</span>.greeting = message;</span><br><span class="line">    &#125;</span><br><span class="line">    @log(<span class="string">'info'</span>)</span><br><span class="line">    greet() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'greet'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello, "</span> + <span class="keyword">this</span>.greeting;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> greeter = <span class="keyword">new</span> Greeter(<span class="string">'1'</span>);</span><br><span class="line">greeter.greet();</span><br><span class="line"></span><br><span class="line">----------------- 直接写，切在方法前</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">value: string</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target: any, propertyKey: string, descriptor: PropertyDescriptor</span>) </span>&#123; </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'before run '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> </span>&#123;</span><br><span class="line">      greeting: string;</span><br><span class="line">      <span class="keyword">constructor</span>(message: string) &#123;</span><br><span class="line">          <span class="keyword">this</span>.greeting = message;</span><br><span class="line">      &#125;</span><br><span class="line">      @log(<span class="string">'info'</span>)</span><br><span class="line">      greet() &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'greet'</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="string">"Hello, "</span> + <span class="keyword">this</span>.greeting;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> greeter = <span class="keyword">new</span> Greeter(<span class="string">'1'</span>);</span><br><span class="line">  greeter.greet();</span><br></pre></td></tr></table></figure>
+
+<h2 id="属性装饰器"><a href="#属性装饰器" class="headerlink" title="属性装饰器"></a>属性装饰器</h2></li>
+<li><p>修饰属性的, 主要作用是给属性注入值，不用构造函数传递</p>
+</li>
+<li><p>参数：<br>对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。<br>成员的名字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">injectValue</span> (<span class="params">target: any, propertyKey: string</span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'target:'</span>,target, propertyKey)</span><br><span class="line">          <span class="built_in">console</span>.log(target[propertyKey]);</span><br><span class="line">          target[propertyKey] = <span class="string">'xixi'</span>;</span><br><span class="line">      &#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> </span>&#123;</span><br><span class="line">      @injectValue</span><br><span class="line">      public greeting: string;</span><br><span class="line">      <span class="keyword">constructor</span>(message: string) &#123;</span><br><span class="line">        <span class="comment">//   this.greeting = message;</span></span><br><span class="line">      &#125;</span><br><span class="line">      greet() &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'greet：'</span>, <span class="keyword">this</span>.greeting);</span><br><span class="line">          <span class="keyword">return</span> <span class="string">"Hello, "</span> + <span class="keyword">this</span>.greeting;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> greeter = <span class="keyword">new</span> Greeter(<span class="string">'pikun'</span>);</span><br><span class="line">  greeter.greet();</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数装饰器"><a href="#参数装饰器" class="headerlink" title="参数装饰器"></a>参数装饰器</h2></li>
+</ul>
+
+            
+            <p class="more">
+                <a href="https://spcbacktolife.github.io/2019/12/05/typescript-注解/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="https://spcbacktolife.github.io/2019/12/05/typescript-注解/" title="typescript-注解">
+                
+                    <img class="thumbnail" src="/img/default.png" data-echo="/img/thumbnail/5.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
         <a class="cat-link" href="/categories/Node/">Node</a>
         
         <!-- 文章标题 -->
@@ -228,7 +307,8 @@
 <li>数据缓存、存储服务管理</li>
 <li>应用基础功能服务设计：录屏、截屏</li>
 <li>应用集成三方环境设计：Python环境</li>
-<li>应用<code>webview</code>注入js设计</li></ul>
+<li>应用<code>webview</code>注入js设计</li>
+<li>运行日志集成</li></ul>
             
             <p class="more">
                 <a href="https://spcbacktolife.github.io/2019/10/16/Electron-从零到一搭建-编写基础看框架/">阅读剩下更多</a>
@@ -269,12 +349,27 @@
     </li>
     
     <li>
+        <a href="/categories/vscode/">vscode</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/personal/">personal</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
         <a href="/categories/React/">React</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
         <a href="/categories/Node/">Node</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/模块化学习/">模块化学习</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -289,17 +384,27 @@
     </li>
     
     <li>
+        <a href="/categories/Node/Webpack/">Webpack</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/data-structures/">data structures</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
         <a href="/categories/Mobx/">Mobx</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/项目管理/">项目管理</a>
+        <a href="/categories/复杂度/">复杂度</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/Node/Webpack/">Webpack</a>
+        <a href="/categories/项目管理/">项目管理</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -328,15 +433,29 @@
   
     <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
   
+    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+  
+    <a class="tag-item" href="/tags/vscode/" title="vscode">vscode (1)</a>
+  
+    <a class="tag-item" href="/tags/typings/" title="typings">typings (1)</a>
+  
+    <a class="tag-item" href="/tags/个人成长/" title="个人成长">个人成长 (1)</a>
+  
     <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
   
     <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
   
     <a class="tag-item" href="/tags/node/" title="node">node (2)</a>
   
-    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (2)</a>
+    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (3)</a>
   
     <a class="tag-item" href="/tags/hotReload/" title="hotReload">hotReload (1)</a>
+  
+    <a class="tag-item" href="/tags/amd/" title="amd">amd (1)</a>
+  
+    <a class="tag-item" href="/tags/commonjs/" title="commonjs">commonjs (1)</a>
+  
+    <a class="tag-item" href="/tags/es6/" title="es6">es6 (1)</a>
   
     <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
   
@@ -346,13 +465,17 @@
   
     <a class="tag-item" href="/tags/java/" title="java">java (1)</a>
   
+    <a class="tag-item" href="/tags/data-structures/" title="data structures">data structures (3)</a>
+  
     <a class="tag-item" href="/tags/Mobx/" title="Mobx">Mobx (2)</a>
   
     <a class="tag-item" href="/tags/React/" title="React">React (2)</a>
   
-    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
+    <a class="tag-item" href="/tags/时间复杂度/" title="时间复杂度">时间复杂度 (1)</a>
   
-    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+    <a class="tag-item" href="/tags/空间复杂度/" title="空间复杂度">空间复杂度 (1)</a>
+  
+    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
   
     <a class="tag-item" href="/tags/主进程/" title="主进程">主进程 (1)</a>
   

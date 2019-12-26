@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Array | 秋泽雨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="秋泽雨、全栈开发">
+    <meta name="description" content="秋泽雨的个人小站">
+
+    
+    <link rel="alternative" href="/atom.xml" title="秋泽雨" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+</head>
+</html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">秋泽雨</span>
+                    <span class="description">秋泽雨小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2019/10/24/Array/index.html" class="item ">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2019/10/24/Array/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/spcBackToLife/" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/headIcon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Array</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        秋泽雨 发表于
+        <time datetime="2019-10-23T23:24:29.000Z">2019-10-24</time>
+    </p>
+    <div class="post-content">
+        <h2 id="数组的基本知识"><a href="#数组的基本知识" class="headerlink" title="数组的基本知识"></a>数组的基本知识</h2><ol>
+<li>基本写法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> intArray[];</span><br><span class="line">intArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> b[] = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;;</span><br><span class="line"><span class="keyword">int</span> b[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;; <span class="comment">// latest java can use this.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> each: b) &#123;</span><br><span class="line">  System.out.println(each);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Student student[] = <span class="keyword">new</span> Student[<span class="number">5</span>];</span><br><span class="line">student[<span class="number">1</span>] = <span class="keyword">new</span> Student(<span class="string">"student1"</span>);</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<ol start="2">
+<li><p>内存存储<br><a href="https://www.cnblogs.com/ssh-html/p/9886277.html" target="_blank" rel="noopener">数组是计算机分配的一组连续的内存空间.</a></p>
+</li>
+<li><p>数组特点:</p>
+<ul>
+<li>数组的直接父类：Object</li>
+<li>每个数组都实现了 Cloneable 和 java.io.Serializable.</li>
+<li>数组的length 是属性，不是方法</li>
+<li>数组是一块连续空间</li>
+</ul>
+</li>
+<li><p>算法复杂度计算:<br><a href="https://www.cnblogs.com/silence-x/p/10544072.html" target="_blank" rel="noopener">复杂度计算</a></p>
+<h2 id="实现一个动态数组（可自动调整大小的可变数组ArrayList）"><a href="#实现一个动态数组（可自动调整大小的可变数组ArrayList）" class="headerlink" title="实现一个动态数组（可自动调整大小的可变数组ArrayList）"></a>实现一个动态数组（可自动调整大小的可变数组ArrayList）</h2><p>ArrayList特点:</p>
+<ul>
+<li>基于数组实现的List类，可以动态增加或减小。</li>
+<li>ArrayList的用法和Vector向类似,ArrayList和Vector的区别是：ArrayList是线程不安全的，当多条线程访问同一个ArrayList集合时，程序需要手动保证该集合的同步性，而Vector则是线程安全的。</li>
+<li>arrayList由于本质是数组，所以它在数据的查询方面会很快，而在插入删除这些方面，性能下降很多，有移动很多数据才能达到应有的效果</li>
+<li>arrayList可以存放null</li>
+<li>arrayList实现了RandomAccess，所以在遍历它的时候推荐使用for循环</li>
+<li>扩容的代价非常大，因此每次超出都会扩容2倍, remove 的时候并不会回收内存。</li>
+</ul>
+</li>
+</ol>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><h2 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h2><h2 id="Leetcode-专业术语"><a href="#Leetcode-专业术语" class="headerlink" title="Leetcode 专业术语"></a>Leetcode 专业术语</h2><ol>
+<li><p>原地算法：原地算法不依赖额外的资源或者依赖少数的额外资源。</p>
+</li>
+<li><p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。<br>示例 1:<br>输入: [1,2,3,4,5,6,7] 和 k = 3<br>输出: [5,6,7,1,2,3,4]<br>解释:<br>向右旋转 1 步: [7,1,2,3,4,5,6]<br>向右旋转 2 步: [6,7,1,2,3,4,5]<br>向右旋转 3 步: [5,6,7,1,2,3,4]<br>示例 2:</p>
+<p>输入: [-1,-100,3,99] 和 k = 2<br>输出: [3,99,-1,-100]<br>解释:<br>向右旋转 1 步: [99,-1,-100,3]<br>向右旋转 2 步: [3,99,-1,-100]<br>说明:</p>
+<p>尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。<br>要求使用空间复杂度为 O(1) 的 原地 算法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// o(k*n) = O(n)</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> length = nums.length;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">            temp = nums[<span class="number">0</span>];</span><br><span class="line">            nums[<span class="number">0</span>] = nums[length - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = length - <span class="number">2</span>; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">                nums[j + <span class="number">1</span>] = nums[j];</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">if</span> (nums.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                nums[<span class="number">1</span>] = temp;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                nums[<span class="number">0</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> numsLength = nums.length;</span><br><span class="line">        <span class="keyword">int</span> realK = k % numsLength;</span><br><span class="line">        <span class="keyword">int</span>[] tempNums = <span class="keyword">new</span> <span class="keyword">int</span>[realK];</span><br><span class="line">        <span class="keyword">int</span> pointIndex = numsLength - realK; </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = pointIndex; i&lt; numsLength; i++) &#123;</span><br><span class="line">            tempNums[i + realK - numsLength] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = pointIndex - <span class="number">1</span>; i&gt;= <span class="number">0</span>;  i--) &#123;</span><br><span class="line">            nums[i + realK] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; realK; i ++) &#123;</span><br><span class="line">            nums[i] = tempNums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有效的山脉数组：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validMountainArray</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(A.length &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> i, j;</span><br><span class="line">        <span class="keyword">boolean</span> isMountain = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">int</span> top = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> topIndex = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 采用统一流程比较去重、最大值</span></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; A.length; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i] &gt; top) &#123;</span><br><span class="line">                top = A[i];</span><br><span class="line">                topIndex = i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>((i &lt; A.length - <span class="number">1</span>) &amp;&amp; (A[i] == A[i + <span class="number">1</span>])) &#123;</span><br><span class="line">                isMountain = <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!isMountain || topIndex == <span class="number">0</span> || topIndex == A.length - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (i = topIndex; i &gt; <span class="number">0</span>; i --) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i - <span class="number">1</span>] &gt; A[i]) &#123;</span><br><span class="line">                isMountain = <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isMountain) &#123;</span><br><span class="line">            <span class="keyword">for</span> (i = topIndex; i &lt; A.length - <span class="number">1</span>; i ++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (A[i] &lt; A[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                    isMountain = <span class="keyword">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isMountain;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 1. 顶点不在2端</span></span><br><span class="line">  <span class="comment">// 2. 定点左侧曾、右侧减</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validMountainArray</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1. 顶点不在2端</span></span><br><span class="line">    <span class="comment">// 2. 定点左侧曾、右侧减</span></span><br><span class="line">        <span class="keyword">int</span> maxValue = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> maxIndex = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; A.length; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i] &gt; maxValue) &#123;</span><br><span class="line">                maxValue = A[i];</span><br><span class="line">                maxIndex = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (maxIndex == <span class="number">0</span> || maxIndex == A.length - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">boolean</span> isMountain = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; maxIndex; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i] &gt; A[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                isMountain = <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (!isMountain) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (i = maxIndex; i &lt; A.length - <span class="number">1</span>; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i] &lt;= A[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                isMountain = <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isMountain;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>递增直到递减</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validMountainArray</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(A.length &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//递增直到递减</span></span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">boolean</span> isUp = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> isMountain = <span class="keyword">true</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 如果开始不递增，最后不递减，则不符合</span></span><br><span class="line">        <span class="keyword">if</span> (A[<span class="number">0</span>] &gt;= A[<span class="number">1</span>] || A[A.length - <span class="number">2</span>] &lt;= A[A.length -<span class="number">1</span>]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt; A.length - <span class="number">2</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (isUp &amp;&amp; A[i] &gt; A[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                isUp = <span class="keyword">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((!isUp) &amp;&amp; A[i] &lt;= A[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                isMountain = <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isMountain) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>困难Letcoode题: <a href="https://leetcode-cn.com/problems/find-in-mountain-array/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/find-in-mountain-array/</a><br>给你一个 山脉数组 mountainArr，请你返回能够使得 mountainArr.get(index) 等于 target 最小 的下标 index 值。<br>如果不存在这样的下标 index，就请返回 -1。<br>所谓山脉数组，即数组 A 假如是一个山脉数组的话，需要满足如下条件：</p>
+<ul>
+<li>首先，A.length &gt;= 3</li>
+<li>其次，在 0 &lt; i &lt; A.length - 1 条件下，存在 i 使得：<br> A[0] &lt; A[1] &lt; … A[i-1] &lt; A[i]<br> A[i] &gt; A[i+1] &gt; … &gt; A[A.length - 1]<br>你将 不能直接访问该山脉数组，必须通过 MountainArray 接口来获取数据：<br>MountainArray.get(k) - 会返回数组中索引为k 的元素（下标从 0 开始）<br>MountainArray.length() - 会返回该数组的长度<br>注意：<br>对 MountainArray.get 发起超过 100 次调用的提交将被视为错误答案。此外，任何试图规避判题系统的解决方案都将会导致比赛资格被取消。<br>为了帮助大家更好地理解交互式问题，我们准备了一个样例 “答案”：<a href="https://leetcode-cn.com/playground/RKhe3ave，请注意这" target="_blank" rel="noopener">https://leetcode-cn.com/playground/RKhe3ave，请注意这</a> 不是一个正确答案。<br> 示例 1：<br> 输入：array = [1,2,3,4,5,3,1], target = 3<br> 输出：2<br> 解释：3 在数组中出现了两次，下标分别为 2 和 5，我们返回最小的下标 2。<br> 示例 2：<br> 输入：array = [0,1,2,4,2,1], target = 3<br> 输出：-1<br> 解释：3 在数组中没有出现，返回 -1。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findInMountainArray</span><span class="params">(<span class="keyword">int</span> target, MountainArray mountainArr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.findInPart(target, mountainArr, <span class="number">0</span>, mountainArr.length() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findInPart</span><span class="params">(<span class="keyword">int</span> target, MountainArray mountainArr, <span class="keyword">int</span> startIndex, <span class="keyword">int</span> endIndex)</span>          </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> length = mountainArr.length();</span><br><span class="line">            <span class="keyword">int</span> midIndex = (endIndex - startIndex + <span class="number">1</span>) / <span class="number">2</span> + startIndex;</span><br><span class="line">            <span class="keyword">int</span> midValue = mountainArr.get(midIndex);</span><br><span class="line">            <span class="keyword">int</span> lastIndex = midIndex - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> lastValue;</span><br><span class="line">            <span class="keyword">int</span> nextValue;</span><br><span class="line">            <span class="keyword">int</span> nextIndex = midIndex + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> targetIndex = -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(midIndex &gt; startIndex + <span class="number">1</span> &amp;&amp; midIndex &lt; endIndex - <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 还能继续分，并且寻找</span></span><br><span class="line">                lastValue = mountainArr.get(lastIndex);</span><br><span class="line">                nextValue = mountainArr.get(nextIndex);</span><br><span class="line">                <span class="keyword">if</span> (midValue &gt; lastValue &amp;&amp; midValue &gt; nextValue) &#123;</span><br><span class="line">                    <span class="comment">// 山顶</span></span><br><span class="line">                    <span class="keyword">if</span> (midValue &lt; target) &#123;</span><br><span class="line">                        <span class="comment">// 不存在，不用继续找了</span></span><br><span class="line">                        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (midValue == target) &#123;</span><br><span class="line">                        <span class="comment">// 找到唯一解，返回。</span></span><br><span class="line">                        targetIndex = midIndex;</span><br><span class="line">                        <span class="keyword">return</span> targetIndex;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">// 可能有2个解。</span></span><br><span class="line">                        <span class="comment">// 左侧求解，求得则结束</span></span><br><span class="line">                        targetIndex = <span class="keyword">this</span>.findInPart(target, mountainArr, startIndex, midIndex);</span><br><span class="line">                        <span class="comment">// 左侧得解</span></span><br><span class="line">                        <span class="keyword">if</span> (targetIndex != -<span class="number">1</span>) &#123;</span><br><span class="line">                            <span class="keyword">return</span> targetIndex;</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="comment">// 左侧无解，寻求右侧</span></span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">this</span>.findInPart(target, mountainArr, midIndex, endIndex);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    </span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (midValue &gt; lastValue &amp;&amp; midValue &lt; nextValue) &#123;</span><br><span class="line">                    <span class="comment">// 前半</span></span><br><span class="line">                    <span class="keyword">if</span> (midValue == target) &#123;</span><br><span class="line">                        <span class="comment">// 找到</span></span><br><span class="line">                        <span class="keyword">return</span> midIndex;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (midValue &gt; target) &#123;</span><br><span class="line">                        <span class="comment">// 继续2边寻找，左右都需要</span></span><br><span class="line">                        <span class="comment">// 可能有2个解。</span></span><br><span class="line">                        <span class="comment">// 左侧求解，求得则结束</span></span><br><span class="line">                        targetIndex = <span class="keyword">this</span>.findInPart(target, mountainArr, startIndex, midIndex);</span><br><span class="line">                        <span class="comment">// 左侧得解</span></span><br><span class="line">                        <span class="keyword">if</span> (targetIndex != -<span class="number">1</span>) &#123;</span><br><span class="line">                            <span class="keyword">return</span> targetIndex;</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="comment">// 左侧无解，寻求右侧</span></span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">this</span>.findInPart(target, mountainArr, midIndex, endIndex);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">this</span>.findInPart(target, mountainArr, midIndex, endIndex);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 后半边</span></span><br><span class="line">                    <span class="comment">// 左侧求解</span></span><br><span class="line">                    targetIndex = <span class="keyword">this</span>.findInPart(target, mountainArr, startIndex, midIndex);</span><br><span class="line">                    <span class="keyword">if</span> (targetIndex != -<span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="keyword">return</span> targetIndex;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (midValue == target) &#123;</span><br><span class="line">                        <span class="comment">// 居中</span></span><br><span class="line">                        <span class="keyword">return</span> midIndex;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">// 左侧无解，寻求右侧</span></span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">this</span>.findInPart(target, mountainArr, midIndex, endIndex);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 分左半边拆到最细，无法再分</span></span><br><span class="line">                <span class="keyword">if</span>(midIndex == startIndex) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (midValue == target) &#123;</span><br><span class="line">                        <span class="keyword">return</span> midIndex;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">// 右边如果未到边界，则触发</span></span><br><span class="line">                        <span class="keyword">if</span> (midIndex &lt; endIndex - <span class="number">1</span>) &#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">this</span>.findInPart(target, mountainArr, midIndex, endIndex);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            nextValue = mountainArr.get(endIndex);</span><br><span class="line">                            <span class="keyword">if</span> (nextValue == target) &#123;</span><br><span class="line">                                <span class="keyword">return</span> endIndex;</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (midIndex == startIndex + <span class="number">1</span>)&#123;<span class="comment">//..</span></span><br><span class="line">                    lastValue = mountainArr.get(startIndex);</span><br><span class="line">                    <span class="keyword">if</span> (midValue == target) &#123;</span><br><span class="line">                        <span class="keyword">return</span> midIndex;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (lastValue == target) &#123;</span><br><span class="line">                        <span class="keyword">return</span> startIndex;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">if</span> (midIndex &lt; endIndex - <span class="number">1</span>) &#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">this</span>.findInPart(target, mountainArr, midIndex, endIndex);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            nextValue = mountainArr.get(endIndex);</span><br><span class="line">                            <span class="keyword">if</span> (nextValue == target) &#123;</span><br><span class="line">                                <span class="keyword">return</span> endIndex;</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (midIndex == endIndex) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (midValue == target) &#123;</span><br><span class="line">                        <span class="keyword">return</span> midIndex;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">if</span> (midIndex &gt; startIndex + <span class="number">1</span>) &#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">this</span>.findInPart(target, mountainArr, startIndex, midIndex);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            lastValue = mountainArr.get(startIndex);</span><br><span class="line">                            <span class="keyword">if</span> (lastValue == target) &#123;</span><br><span class="line">                                <span class="keyword">return</span> startIndex;</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    nextValue = mountainArr.get(endIndex);</span><br><span class="line">                    <span class="keyword">if</span> (midValue == target) &#123;</span><br><span class="line">                        <span class="keyword">return</span> midIndex;</span><br><span class="line">                    &#125; </span><br><span class="line">                    </span><br><span class="line">                    <span class="keyword">if</span> (midIndex &gt; startIndex + <span class="number">1</span>) &#123;</span><br><span class="line">                        targetIndex =  <span class="keyword">this</span>.findInPart(target, mountainArr, startIndex, midIndex);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            lastValue = mountainArr.get(startIndex);</span><br><span class="line">                            <span class="keyword">if</span> (lastValue == target) &#123;</span><br><span class="line">                                <span class="keyword">return</span> startIndex;</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (targetIndex == -<span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (nextValue == target) &#123;</span><br><span class="line">                            <span class="keyword">return</span> endIndex;</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span> targetIndex;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/data-structures/">data structures</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/tags/data-structures/" title="data structures">data structures</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/2019/10/25/时间复杂度、空间复杂度/">
+            
+                时间复杂度、空间复杂度
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/2019/10/22/I-am-ready-to-go-to-google/">
+            
+                How to be a goolger
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  <script src="/js/comment.js"></script>
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'Array' || '2019/10/24/Array/',
+    owner: 'spcBackToLife',
+    repo: 'spcBackToLife.github.io',
+    clientId: '36f5037c3e1209eaddc1',
+    clientSecret: '038a6d949d922e4d9d0d18d1d7b8c301f175bbab'
+  });
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Electron/">Electron</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/vscode/">vscode</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/personal/">personal</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React/">React</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Node/">Node</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/模块化学习/">模块化学习</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/github/">github</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/RabbitMQ/">RabbitMQ</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Node/Webpack/">Webpack</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/data-structures/">data structures</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Mobx/">Mobx</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/复杂度/">复杂度</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/项目管理/">项目管理</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Node/Webpack/Typescript/">Typescript</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/博客/" title="博客">博客 (4)</a>
+  
+    <a class="tag-item" href="/tags/Electron/" title="Electron">Electron (6)</a>
+  
+    <a class="tag-item" href="/tags/Problems/" title="Problems">Problems (2)</a>
+  
+    <a class="tag-item" href="/tags/多窗口/" title="多窗口">多窗口 (1)</a>
+  
+    <a class="tag-item" href="/tags/vscode/" title="vscode">vscode (1)</a>
+  
+    <a class="tag-item" href="/tags/typings/" title="typings">typings (1)</a>
+  
+    <a class="tag-item" href="/tags/个人成长/" title="个人成长">个人成长 (1)</a>
+  
+    <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack4/" title="webpack4">webpack4 (2)</a>
+  
+    <a class="tag-item" href="/tags/node/" title="node">node (2)</a>
+  
+    <a class="tag-item" href="/tags/typescript/" title="typescript">typescript (3)</a>
+  
+    <a class="tag-item" href="/tags/hotReload/" title="hotReload">hotReload (1)</a>
+  
+    <a class="tag-item" href="/tags/amd/" title="amd">amd (1)</a>
+  
+    <a class="tag-item" href="/tags/commonjs/" title="commonjs">commonjs (1)</a>
+  
+    <a class="tag-item" href="/tags/es6/" title="es6">es6 (1)</a>
+  
+    <a class="tag-item" href="/tags/github/" title="github">github (1)</a>
+  
+    <a class="tag-item" href="/tags/comment/" title="comment">comment (1)</a>
+  
+    <a class="tag-item" href="/tags/RabbitMQ/" title="RabbitMQ">RabbitMQ (1)</a>
+  
+    <a class="tag-item" href="/tags/java/" title="java">java (1)</a>
+  
+    <a class="tag-item" href="/tags/data-structures/" title="data structures">data structures (3)</a>
+  
+    <a class="tag-item" href="/tags/Mobx/" title="Mobx">Mobx (2)</a>
+  
+    <a class="tag-item" href="/tags/React/" title="React">React (2)</a>
+  
+    <a class="tag-item" href="/tags/时间复杂度/" title="时间复杂度">时间复杂度 (1)</a>
+  
+    <a class="tag-item" href="/tags/空间复杂度/" title="空间复杂度">空间复杂度 (1)</a>
+  
+    <a class="tag-item" href="/tags/项目管理/" title="项目管理">项目管理 (1)</a>
+  
+    <a class="tag-item" href="/tags/主进程/" title="主进程">主进程 (1)</a>
+  
+    <a class="tag-item" href="/tags/渲染进程/" title="渲染进程">渲染进程 (1)</a>
+  
+    <a class="tag-item" href="/tags/设计模式/" title="设计模式">设计模式 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://github.com/spcBackToLife/" target="_blank" title="秋泽雨的github">Github</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2019
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
+</html>
